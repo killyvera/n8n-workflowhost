@@ -1,18 +1,9 @@
-# n8n-workflowhost — build from THIS repo (not docker.n8n.io/n8nio/n8n).
+# n8n-workflowhost — Muelle pull deploy (branch deploy/muelle-ghcr).
+# Dockerfile is FROM ghcr.io/killyvera/n8n-workflowhost (no monorepo compile).
+# Full source build: Dockerfile.build (or master Dockerfile).
 #
-# Full in-Docker compile:
-#   docker compose build && docker compose up -d
-#
-# Host compile + slim image:
-#   pnpm run build:n8n
-#   set DOCKERFILE=Dockerfile.prebuilt
-#   docker compose build && docker compose up -d
-#
-# Persistence: Postgres (users, workflows, credentials metadata).
-# Keep N8N_ENCRYPTION_KEY stable across redeploys or credentials become unreadable.
-# Do NOT put DB credentials in the Dockerfile — runtime env only.
-#
-# Editor (local): http://localhost:5678
+# Persistence: Postgres. Keep N8N_ENCRYPTION_KEY stable across redeploys.
+# Editor: http://localhost:5678
 
 services:
   postgres:
@@ -41,11 +32,8 @@ services:
   n8n:
     build:
       context: .
-      dockerfile: ${DOCKERFILE:-Dockerfile}
-      args:
-        NODE_VERSION: "26.7.0"
-        N8N_VERSION: "workflowhost"
-    image: n8n-workflowhost:local
+      dockerfile: Dockerfile
+    image: ghcr.io/killyvera/n8n-workflowhost:1.0.0
     container_name: n8n-workflowhost
     restart: unless-stopped
     depends_on:
