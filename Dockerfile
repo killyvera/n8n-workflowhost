@@ -34,13 +34,12 @@ ENV CI=true \
 	PNPM_NETWORK_CONCURRENCY=8 \
 	PNPM_CHILD_CONCURRENCY=4
 
-# pnpm 12.3.4 tries to rewrite packageManagerDependencies under --frozen-lockfile and
-# fails (ERR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE). We already install the pinned
-# pnpm globally above, so drop the packageManager pin for this install only.
-RUN node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); delete p.packageManager; fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');" \
-	&& NODE_ENV= pnpm install --frozen-lockfile
-ENV NODE_ENV=production
-RUN pnpm run build:n8n
+# pnpm 12.3.4 fails frozen install when it wants to rewrite packageManagerDependencies.
+# Drop packageManager only for install, then restore it — turbo build requires the field.
+RUN node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); fs.writeFileSync('/tmp/n8n-packageManager.txt', p.packageManager || ''); delete p.packageManager; fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');" \
+	&& NODE_ENV= pnpm install --frozen-lockfile \
+	&& node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); const pm=fs.readFileSync('/tmp/n8n-packageManager.txt','utf8').trim(); if (pm) p.packageManager = pm; fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');" \
+	&& NODE_ENV= pnpm run build:n8n
 
 # -----------------------------------------------------------------------------
 # Runtime — full bookworm (has ca-certificates); no apt at runtime (avoids mirror 503s)
