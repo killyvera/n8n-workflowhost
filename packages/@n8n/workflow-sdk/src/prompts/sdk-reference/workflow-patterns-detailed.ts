@@ -1,7 +1,7 @@
 /**
  * Legacy code-builder workflow patterns — verbose examples with positions and sample output.
  *
- * Used by the sandbox-based builder (ai-workflow-builder.ee) where explicit positions
+ * Used by the sandbox-based builder (ai-workflow-builder) where explicit positions
  * and output data are needed for code generation and validation.
  *
  * See also: workflow-patterns.ts for the instance-AI variant

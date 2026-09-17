@@ -50,12 +50,12 @@ import type { WorkflowRunner } from '@/workflow-runner';
 import type { DynamicNodeParametersService } from '@/services/dynamic-node-parameters.service';
 import { NodeResourceExplorerService } from '@/services/node-resource-explorer.service';
 import type { FolderService } from '@/services/folder.service';
-import type { ProjectService } from '@/services/project.service.ee';
+import type { ProjectService } from '@/services/project.service';
 import type { TagService } from '@/services/tag.service';
 
 import type { InstanceAiSettingsService } from '../instance-ai-settings.service';
 
-import type { EnterpriseWorkflowService } from '@/workflows/workflow.service.ee';
+import type { EnterpriseWorkflowService } from '@/workflows/workflow.feature.service';
 import type { ExecutionPersistence } from '@/executions/execution-persistence';
 import type { CollaborationService } from '@/collaboration/collaboration.service';
 import type { EventService } from '@/events/event.service';
@@ -72,7 +72,7 @@ import type { AiGatewayService } from '@/services/ai-gateway.service';
 import type { Telemetry } from '@/telemetry';
 import type { WorkflowTemplatesService } from '../workflow-templates.service';
 
-vi.mock('@/permissions.ee/check-access');
+vi.mock('@/permissions/check-access');
 vi.mock('@/workflow-execute-additional-data', () => ({
 	getBase: vi.fn().mockResolvedValue({}),
 }));
@@ -80,7 +80,7 @@ vi.mock('node:fs/promises', () => ({
 	readFile: vi.fn().mockResolvedValue('[]'),
 }));
 
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 import type { WorkflowFinderService } from '@/workflows/workflow-finder.service';
 import type { WorkflowHistoryService } from '@/workflows/workflow-history/workflow-history.service';
 import type { WorkflowService } from '@/workflows/workflow.service';

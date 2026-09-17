@@ -2,7 +2,7 @@
  * Workflow rules — strict constraints for code generation.
  *
  * Consumed by:
- * - Code Builder Agent (ai-workflow-builder.ee)
+ * - Code Builder Agent (ai-workflow-builder)
  * - MCP Server (external SDK reference)
  * - Instance AI workflow-builder skill
  */

@@ -25,7 +25,7 @@ import { DataTableAccessDeniedError } from '@/modules/data-table/errors/data-tab
 import { DataTableNameConflictError } from '@/modules/data-table/errors/data-table-name-conflict.error';
 import { DataTableNotFoundError } from '@/modules/data-table/errors/data-table-not-found.error';
 import { DataTableValidationError } from '@/modules/data-table/errors/data-table-validation.error';
-import { ProjectNotFoundError } from '@/services/project.service.ee';
+import { ProjectNotFoundError } from '@/services/project.service';
 
 const handleError = (error: unknown) => {
 	if (error instanceof DataTableValidationError) {

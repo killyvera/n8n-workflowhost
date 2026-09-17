@@ -5,14 +5,14 @@ import {
 	type ActivityEventCategory,
 	type ActivityResourceType,
 } from './activity-event';
-import { AgentEvalDataset, type AgentEvalColumnMapping } from './agent-eval-dataset.ee';
-import { AgentEvalRating, type AgentEvalVote } from './agent-eval-rating.ee';
-import { AgentEvalResult, type AgentEvalResultStatus } from './agent-eval-result.ee';
-import { AgentEvalRun, type AgentEvalRunStatus } from './agent-eval-run.ee';
+import { AgentEvalDataset, type AgentEvalColumnMapping } from './agent-eval-dataset';
+import { AgentEvalRating, type AgentEvalVote } from './agent-eval-rating';
+import { AgentEvalResult, type AgentEvalResultStatus } from './agent-eval-result';
+import { AgentEvalRun, type AgentEvalRunStatus } from './agent-eval-run';
 import { AiBuilderTemporaryWorkflow } from './ai-builder-temporary-workflow';
 import { AiPreference } from './ai-preference';
-import { AnnotationTagEntity } from './annotation-tag-entity.ee';
-import { AnnotationTagMapping } from './annotation-tag-mapping.ee';
+import { AnnotationTagEntity } from './annotation-tag-entity';
+import { AnnotationTagMapping } from './annotation-tag-mapping';
 import { ApiKey } from './api-key';
 import { AuthIdentity } from './auth-identity';
 import { AuthProviderSyncHistory } from './auth-provider-sync-history';
@@ -23,9 +23,9 @@ import {
 } from './credential-dependency-entity';
 import { CredentialsEntity, type CredentialUsageScope } from './credentials-entity';
 import { DeploymentKey } from './deployment-key';
-import { EvaluationCollection } from './evaluation-collection.ee';
-import { EvaluationConfig } from './evaluation-config.ee';
-import { ExecutionAnnotation } from './execution-annotation.ee';
+import { EvaluationCollection } from './evaluation-collection';
+import { EvaluationConfig } from './evaluation-config';
+import { ExecutionAnnotation } from './execution-annotation';
 import { ExecutionData } from './execution-data';
 import { ExecutionEntity } from './execution-entity';
 import type { ExecutionDataStorageLocation } from './execution-entity';
@@ -37,7 +37,7 @@ import { InvalidAuthToken } from './invalid-auth-token';
 import { PollerState } from './poller-state';
 import { ProcessedData } from './processed-data';
 import { Project } from './project';
-import { ProjectPoolSettings } from './project-pool-settings.ee';
+import { ProjectPoolSettings } from './project-pool-settings';
 import { ProjectRelation } from './project-relation';
 import { ProjectSecretsProviderAccess } from './project-secrets-provider-access';
 import type { SecretsProviderAccessRole } from './project-secrets-provider-access';
@@ -65,8 +65,8 @@ import { Settings } from './settings';
 import { SharedCredentials } from './shared-credentials';
 import { SharedWorkflow } from './shared-workflow';
 import { TagEntity } from './tag-entity';
-import { TestCaseExecution } from './test-case-execution.ee';
-import { TestRun } from './test-run.ee';
+import { TestCaseExecution } from './test-case-execution';
+import { TestRun } from './test-run';
 import { User } from './user';
 import { Variables } from './variables';
 import { WebhookEntity } from './webhook-entity';
@@ -86,18 +86,18 @@ import {
 } from './workflow-publication-trigger-status';
 import { WorkflowPublishHistory } from './workflow-publish-history';
 import { WorkflowPublishedVersion } from './workflow-published-version';
-import { WorkflowReviewActivityComment } from './workflow-review-activity-comment.ee';
-import { WorkflowReviewActivity } from './workflow-review-activity.ee';
-import { WorkflowReviewRequestAuthor } from './workflow-review-request-author.ee';
-import { WorkflowReviewRequestReviewer } from './workflow-review-request-reviewer.ee';
-import { WorkflowReviewRequestWorkflow } from './workflow-review-request-workflow.ee';
+import { WorkflowReviewActivityComment } from './workflow-review-activity-comment';
+import { WorkflowReviewActivity } from './workflow-review-activity';
+import { WorkflowReviewRequestAuthor } from './workflow-review-request-author';
+import { WorkflowReviewRequestReviewer } from './workflow-review-request-reviewer';
+import { WorkflowReviewRequestWorkflow } from './workflow-review-request-workflow';
 import {
 	WorkflowReviewRequest,
 	WorkflowReviewRequestDecision,
 	WorkflowReviewRequestDecisionList,
 	WorkflowReviewRequestState,
 	WorkflowReviewRequestStateList,
-} from './workflow-review-request.ee';
+} from './workflow-review-request';
 import { WorkflowStatistics } from './workflow-statistics';
 import { WorkflowTagMapping } from './workflow-tag-mapping';
 

@@ -22,7 +22,7 @@ import { AuthService } from '@/auth/auth.service';
 import { RESPONSE_ERROR_MESSAGES } from '@/constants';
 import { UnauthenticatedError } from '@/errors/response-errors/unauthenticated.error';
 import { License } from '@/license';
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 import { reportError, send, sendErrorResponse } from '@/response-helper';
 
 import { AbstractServer } from './abstract-server';

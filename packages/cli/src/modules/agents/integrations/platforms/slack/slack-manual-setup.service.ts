@@ -11,7 +11,7 @@ import { BadRequestError } from '@/errors/response-errors/bad-request.error';
 import { ForbiddenError } from '@/errors/response-errors/forbidden.error';
 import { NotFoundError } from '@/errors/response-errors/not-found.error';
 import { CacheService } from '@/services/cache/cache.service';
-import { ProjectService } from '@/services/project.service.ee';
+import { ProjectService } from '@/services/project.service';
 
 import { SlackMethodsService } from './slack-methods.service';
 import { childRecord, type SlackAppSetupSession, slackSetupCacheKey } from './slack-setup.types';

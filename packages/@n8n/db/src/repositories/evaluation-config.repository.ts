@@ -2,7 +2,7 @@ import type { UpsertEvaluationConfigDto } from '@n8n/api-types';
 import { Service } from '@n8n/di';
 import { DataSource, Repository } from '@n8n/typeorm';
 
-import { EvaluationConfig } from '../entities/evaluation-config.ee';
+import { EvaluationConfig } from '../entities/evaluation-config';
 
 @Service()
 export class EvaluationConfigRepository extends Repository<EvaluationConfig> {

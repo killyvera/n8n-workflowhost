@@ -11,7 +11,7 @@ import { DataTableService } from '@/modules/data-table/data-table.service';
 import { DataTableNotFoundError } from '@/modules/data-table/errors/data-table-not-found.error';
 import type { DataTableRequest } from '@/public-api/types';
 import * as middlewares from '@/public-api/v1/shared/middlewares/global.middleware';
-import { ProjectNotFoundError } from '@/services/project.service.ee';
+import { ProjectNotFoundError } from '@/services/project.service';
 
 // Mock middleware before requiring handler
 const mockMiddleware = vi.fn(async (_req, _res, next) => next()) as any;

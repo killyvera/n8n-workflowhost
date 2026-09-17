@@ -2,7 +2,7 @@
  * Node type definition resolver.
  *
  * Resolves TypeScript type definitions for nodes from dist/node-definitions/ directories.
- * Ported from ai-workflow-builder.ee/code-builder/tools/code-builder-get.tool.ts —
+ * Ported from ai-workflow-builder/code-builder/tools/code-builder-get.tool.ts —
  * pure functions without LangChain dependencies.
  */
 

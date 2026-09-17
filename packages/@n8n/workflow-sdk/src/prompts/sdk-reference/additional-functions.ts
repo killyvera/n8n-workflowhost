@@ -2,7 +2,7 @@
  * Additional SDK functions not covered by main workflow patterns.
  *
  * Consumed by:
- * - Code Builder Agent (ai-workflow-builder.ee)
+ * - Code Builder Agent (ai-workflow-builder)
  * - MCP Server (external SDK reference)
  * - Instance AI builder sub-agent
  */

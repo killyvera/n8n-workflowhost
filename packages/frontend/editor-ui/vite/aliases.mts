@@ -1,9 +1,10 @@
 import { resolve } from 'path';
 import type { Alias } from 'vite';
 
-// `@n8n/frontend-vite-config` holds the part that modules also use. Each module needs the same
-// map for its own vitest run. A module must not import from the shell.
-import { shellAliases } from '@n8n/frontend-vite-config';
+// Relative import: Vite loads this config via Node, which cannot execute a
+// workspace package whose main is raw `index.ts` (ERR_UNKNOWN_FILE_EXTENSION).
+// `@n8n/frontend-vite-config` holds the part that modules also use.
+import { shellAliases } from '../../@n8n/frontend-vite-config/index.ts';
 
 export const appAliases = (editorUiDir: string): Alias[] => [
 	{ find: '@', replacement: resolve(editorUiDir, 'src') },

@@ -10,9 +10,9 @@ import { ConflictError } from '@/errors/response-errors/conflict.error';
 import { NotFoundError } from '@/errors/response-errors/not-found.error';
 import { eventNamesAll } from '@/eventbus/event-message-classes';
 import { MessageEventBus } from '@/eventbus/message-event-bus/message-event-bus';
-import { createMessageEventBusDestination } from '@/modules/log-streaming.ee/create-message-event-bus-destination';
-import { assertUserCanUseDestinationCredentials } from '@/modules/log-streaming.ee/destinations/destination-credentials-access';
-import { LogStreamingDestinationService } from '@/modules/log-streaming.ee/log-streaming-destination.service';
+import { createMessageEventBusDestination } from '@/modules/log-streaming/create-message-event-bus-destination';
+import { assertUserCanUseDestinationCredentials } from '@/modules/log-streaming/destinations/destination-credentials-access';
+import { LogStreamingDestinationService } from '@/modules/log-streaming/log-streaming-destination.service';
 
 import { toInternalDestinationOptions, toPublicDestination } from './log-streaming.mapper';
 import type { LogStreamingRequest } from '../../../types';

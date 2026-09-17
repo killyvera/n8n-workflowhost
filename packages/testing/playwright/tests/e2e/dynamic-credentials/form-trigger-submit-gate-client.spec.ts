@@ -19,7 +19,7 @@ import type { ApiHelpers } from '../../../services/api-helper';
  * always does) — that hop does not need Keycloak or a license. The server side
  * that produces these bodies is covered by
  * `packages/nodes-base/nodes/Form/test/utils.test.ts` and
- * `packages/cli/test/integration/dynamic-credentials.ee/form-trigger-submit-gate.api.test.ts`.
+ * `packages/cli/test/integration/dynamic-credentials/form-trigger-submit-gate.api.test.ts`.
  */
 
 const FIELD_LABEL = 'What is your first name?';

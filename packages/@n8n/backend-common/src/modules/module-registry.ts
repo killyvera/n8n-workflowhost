@@ -56,7 +56,6 @@ export class ModuleRegistry {
 		'provisioning',
 		'breaking-changes',
 		'source-control',
-		'dynamic-credentials',
 		'chat-hub',
 		'sso-oidc',
 		'sso-saml',
@@ -75,7 +74,6 @@ export class ModuleRegistry {
 		'n8n-packages',
 		'runtime-credentials',
 		'mcp-registry',
-		'workflow-reviews',
 		'instance-ai',
 	];
 

@@ -2,7 +2,7 @@ import type { User } from '@n8n/db';
 
 import { RESPONSE_ERROR_MESSAGES } from '@/constants';
 import { ForbiddenError } from '@/errors/response-errors/forbidden.error';
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 
 /**
  * The flag pair mirrors `shouldReturnData` in `DataTableRowsRepository`: a dry run

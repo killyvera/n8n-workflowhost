@@ -28,7 +28,6 @@ import {
 	promotionProviderIdParamSchema,
 	type PromotionDirection,
 } from '@n8n/api-types';
-import { ModuleRegistry } from '@n8n/backend-common';
 import { LICENSE_FEATURES } from '@n8n/constants';
 import type { AuthenticatedRequest } from '@n8n/db';
 import {
@@ -49,7 +48,6 @@ import {
 	Put,
 	Query,
 } from '@n8n/decorators';
-import { Container } from '@n8n/di';
 import type { Response } from 'express';
 
 import { BadRequestError } from '@/errors/response-errors/bad-request.error';
@@ -66,11 +64,12 @@ const tags = ['Promotions'];
  * Providers hold credentials, connections point at a remote, and each connection
  * has up to one config per direction. A config is addressed by its direction, so
  * there is no config ID in any path.
+ *
+ * In this fork the promotions backend module is not shipped — every endpoint
+ * returns 503 via the service accessors below.
  */
 @PublicApiController('/promotions')
 export class PromotionsPublicController {
-	constructor(private readonly moduleRegistry: ModuleRegistry) {}
-
 	// -- Providers -----------------------------------------------------------
 
 	@Post('/providers')
@@ -547,32 +546,22 @@ export class PromotionsPublicController {
 
 	// -- Module access -------------------------------------------------------
 
-	private assertModuleActive() {
-		if (!this.moduleRegistry.isActive('promotions')) {
-			throw new ServiceUnavailableError('Promotions module is not enabled');
-		}
+	/** Stub service surface — never returns; always throws. */
+	private unavailable(): never {
+		throw new ServiceUnavailableError('Promotions are not available in this fork');
 	}
 
-	private async providersService() {
-		this.assertModuleActive();
-		const { PromotionProvidersService } = await import(
-			'@/modules/promotions.ee/promotion-providers.service.js'
-		);
-		return Container.get(PromotionProvidersService);
+	// `any` keeps call-site argument types valid while the body always throws.
+	private async providersService(): Promise<any> {
+		return this.unavailable();
 	}
 
-	private async connectionsService() {
-		this.assertModuleActive();
-		const { PromotionConnectionsService } = await import(
-			'@/modules/promotions.ee/promotion-connections.service.js'
-		);
-		return Container.get(PromotionConnectionsService);
+	private async connectionsService(): Promise<any> {
+		return this.unavailable();
 	}
 
-	private async promotionsService() {
-		this.assertModuleActive();
-		const { PromotionsService } = await import('@/modules/promotions.ee/promotions.service.js');
-		return Container.get(PromotionsService);
+	private async promotionsService(): Promise<any> {
+		return this.unavailable();
 	}
 
 	private resolvePage(query: { cursor?: string; limit: number }) {

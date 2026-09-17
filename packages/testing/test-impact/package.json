@@ -16,8 +16,8 @@
   ],
   "scripts": {
     "clean": "rimraf dist .turbo",
-    "build": "tsc",
-    "build:unchecked": "tsc --noCheck",
+    "build": "node ./scripts/stub-build.mjs",
+    "build:unchecked": "pnpm run build",
     "dev": "tsc --watch",
     "test": "vitest run",
     "test:unit": "vitest run",

@@ -1,5 +1,5 @@
 // `SimpleWorkflow` (the return type of `normalizeWorkflow`) is imported from
-// `ai-workflow-builder.ee` via deep relative paths into source files that use
+// `ai-workflow-builder` via deep relative paths into source files that use
 // a `@/*` path alias. That alias collides with instance-ai's own `@/*` mapping
 // when type-checked transitively, so the type resolves to `error` here even
 // though the runtime behaviour is correct.

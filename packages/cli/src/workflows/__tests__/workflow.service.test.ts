@@ -34,7 +34,7 @@ import type { ExecutionPersistence } from '@/executions/execution-persistence';
 import type { ExternalHooks, WorkflowLifecycleHookActor } from '@/external-hooks';
 import type { RedactionEnforcementService } from '@/modules/redaction/redaction-enforcement.service';
 import type { PolicyCleared } from '@n8n/decorators';
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 import type { PolicyEnforcementService } from '@/policy/policy-enforcement.service';
 import { PolicyViolationError } from '@/policy/policy-violation.error';
 import type { DurableJobProvisioner } from '@/scheduling/durable-job-provisioner';
@@ -55,7 +55,7 @@ import type { WorkflowPublishGuardProxy } from '@/workflows/workflow-publish-gua
 import type { WorkflowValidationService } from '@/workflows/workflow-validation.service';
 import { WorkflowService } from '@/workflows/workflow.service';
 
-vi.mock('@/permissions.ee/check-access');
+vi.mock('@/permissions/check-access');
 vi.mock('@/workflow-helpers');
 vi.mock('@/generic-helpers');
 

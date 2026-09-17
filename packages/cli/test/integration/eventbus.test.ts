@@ -10,7 +10,7 @@ import * as utils from './shared/utils/';
 
 /**
  * NOTE: due to issues with mocking the MessageEventBus in multiple tests running in parallel,
- * the event bus tests are run in the eventbus.ee.test.ts file
+ * the event bus tests are run in the eventbus.feature.test.ts file
  * The tests in this file are only checking endpoint permissions.
  */
 

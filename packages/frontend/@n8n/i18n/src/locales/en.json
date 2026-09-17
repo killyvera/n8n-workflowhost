@@ -4051,6 +4051,7 @@
 	"settings.usageAndPlan.title": "Usage and plan",
 	"settings.usageAndPlan.description": "You’re on the {name} {type}",
 	"settings.usageAndPlan.plan": "Plan",
+	"settings.usageAndPlan.localEntitlements.notice": "Local entitlements are active. Premium-style features do not require an n8n activation key or Cloud subscription in this fork.",
 	"settings.usageAndPlan.callOut": "{link} selected paid features for free (forever)",
 	"settings.usageAndPlan.callOut.link": "Unlock",
 	"settings.usageAndPlan.edition": "Edition",

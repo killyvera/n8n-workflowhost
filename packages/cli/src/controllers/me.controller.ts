@@ -24,7 +24,7 @@ import { MeRequest } from '@/requests';
 import { EmailChangeService } from '@/services/email-change.service';
 import { PasswordUtility } from '@/services/password.utility';
 import { UserService } from '@/services/user.service';
-import { getCurrentAuthenticationMethod, isSamlLicensedAndEnabled } from '@/sso.ee/sso-helpers';
+import { getCurrentAuthenticationMethod, isSamlLicensedAndEnabled } from '@/sso/sso-helpers';
 
 import { PersonalizationSurveyAnswersV4 } from './survey-answers.dto';
 

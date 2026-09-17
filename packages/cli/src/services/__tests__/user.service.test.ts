@@ -25,15 +25,15 @@ import { NotFoundError } from '@/errors/response-errors/not-found.error';
 import type { EventService } from '@/events/event.service';
 import type { ExternalHooks } from '@/external-hooks';
 import type { License } from '@/license';
-import type { ProvisioningService } from '@/modules/provisioning.ee/provisioning.service.ee';
+import type { ProvisioningService } from '@/modules/provisioning/provisioning.service';
 import { UrlService } from '@/services/url.service';
 import { UserService } from '@/services/user.service';
-import * as ssoHelpers from '@/sso.ee/sso-helpers';
+import * as ssoHelpers from '@/sso/sso-helpers';
 import type { UserManagementMailer } from '@/user-management/email';
 
 import { JwtService } from '../jwt.service';
 import type { OwnershipService } from '../ownership.service';
-import type { ProjectService } from '../project.service.ee';
+import type { ProjectService } from '../project.service';
 import type { PublicApiKeyService } from '../public-api-key.service';
 import type { RoleService } from '../role.service';
 

@@ -143,8 +143,8 @@ import { CredentialsService } from '@/credentials/credentials.service';
 import { ConflictError } from '@/errors/response-errors/conflict.error';
 import { LockedError } from '@/errors/response-errors/locked.error';
 import { NotFoundError } from '@/errors/response-errors/not-found.error';
-import { EvaluationConfigService } from '@/evaluation.ee/evaluation-config.service';
-import { LlmJudgeProviderRegistry } from '@/evaluation.ee/llm-judge-provider-registry';
+import { EvaluationConfigService } from '@/evaluation/evaluation-config.service';
+import { LlmJudgeProviderRegistry } from '@/evaluation/llm-judge-provider-registry';
 import { EventService } from '@/events/event.service';
 import { ExecutionPersistence } from '@/executions/execution-persistence';
 import { License } from '@/license';
@@ -163,7 +163,7 @@ import { McpRegistryService } from '@/modules/mcp-registry/registry/mcp-registry
 import { WorkflowDependencyQueryService } from '@/modules/workflow-index/workflow-dependency-query.service';
 import { NodeCatalogService } from '@/node-catalog';
 import { NodeTypes } from '@/node-types';
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 import { PolicyEnforcementService } from '@/policy/policy-enforcement.service';
 import { PostHogClient } from '@/posthog';
 import { AiGatewayService } from '@/services/ai-gateway.service';
@@ -171,7 +171,7 @@ import { FolderFinderService } from '@/services/folder-finder.service';
 import { FolderService } from '@/services/folder.service';
 import { InstanceWriteAccessService } from '@/services/instance-write-access.service';
 import { NodeResourceExplorerService } from '@/services/node-resource-explorer.service';
-import { ProjectService } from '@/services/project.service.ee';
+import { ProjectService } from '@/services/project.service';
 import { RoleService } from '@/services/role.service';
 import { TagService } from '@/services/tag.service';
 import { Telemetry } from '@/telemetry';
@@ -181,7 +181,7 @@ import { getRequiredRedactionScopes } from '@/workflows/utils';
 import { WorkflowFinderService } from '@/workflows/workflow-finder.service';
 import { WorkflowHistoryService } from '@/workflows/workflow-history/workflow-history.service';
 import { WorkflowService } from '@/workflows/workflow.service';
-import { EnterpriseWorkflowService } from '@/workflows/workflow.service.ee';
+import { EnterpriseWorkflowService } from '@/workflows/workflow.feature.service';
 
 import { extractResolvedNodeParameters } from './extract-resolved-node-parameters';
 import {
@@ -2218,7 +2218,7 @@ export class InstanceAiAdapterService {
 			async list(options) {
 				// In a project-bound thread the credential list is always the bound
 				// project's usable set (project-shared + global) — the same intersection
-				// `preventTampering` (workflow.service.ee.ts) accepts. A caller-supplied
+				// `preventTampering` (workflow.feature.service.ts) accepts. A caller-supplied
 				// workflowId/projectId must not broaden it.
 				if (boundProjectId) {
 					const scoped = await credentialsService.getCredentialsAUserCanUseInAWorkflow(user, {

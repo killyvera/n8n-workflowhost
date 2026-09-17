@@ -728,7 +728,7 @@ describe('ai-root shapes', () => {
 		const { isAiRootNodeType, describeAiRootShape } = await import('./ai-root-shapes.js');
 
 		// Mirrors the editor's canonical AI_ROOT_NODE_TYPES list
-		// (evaluation.ee/evaluation.constants.ts).
+		// (evaluation/evaluation.constants.ts).
 		for (const type of [
 			'@n8n/n8n-nodes-langchain.openAiAssistant',
 			'@n8n/n8n-nodes-langchain.openAi',

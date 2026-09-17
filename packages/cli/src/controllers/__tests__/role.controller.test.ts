@@ -4,7 +4,7 @@ import { mock } from 'vitest-mock-extended';
 
 import { NotFoundError } from '@/errors/response-errors/not-found.error';
 import type { EventService } from '@/events/event.service';
-import type { ProjectService } from '@/services/project.service.ee';
+import type { ProjectService } from '@/services/project.service';
 import type { RoleService } from '@/services/role.service';
 
 import { RoleController } from '../role.controller';

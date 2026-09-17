@@ -4,7 +4,7 @@
  * Shared by the MCP server tool surface (via `NodeCatalogService`) and Instance
  * AI, which each carried a near-identical fork until they drifted in their
  * connection-type lists. A third, older fork still lives in
- * `ai-workflow-builder.ee` and is tracked separately.
+ * `ai-workflow-builder` and is tracked separately.
  *
  * Callers hand over whatever node shape they already hold: a full
  * `INodeTypeDescription`, a pre-digested `LeanNodeTypeDescription`, or the

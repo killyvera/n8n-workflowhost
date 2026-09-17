@@ -19,7 +19,7 @@
 		}
 	},
 	"include": ["**/*.ts"],
-	// cli/pairwise.ts deep-imports ai-workflow-builder.ee's evaluations source (its own
+	// cli/pairwise.ts deep-imports ai-workflow-builder's evaluations source (its own
 	// `@/` alias can't resolve here); it's a leaf entrypoint, still linted by eslint.
 	"exclude": ["dist/**", ".data/**", "computer-use/data/**", "cli/pairwise.ts"]
 }

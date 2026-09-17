@@ -47,7 +47,7 @@ import { DataTableValidationError } from './errors/data-table-validation.error';
 import { normalizeRows } from './utils/sql-utils';
 
 import { EventService } from '@/events/event.service';
-import { ProjectNotFoundError, ProjectService } from '@/services/project.service.ee';
+import { ProjectNotFoundError, ProjectService } from '@/services/project.service';
 import { RoleService } from '@/services/role.service';
 
 @Service()

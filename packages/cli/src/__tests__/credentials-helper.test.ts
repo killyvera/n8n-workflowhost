@@ -51,7 +51,7 @@ import { CredentialsHelper } from '@/credentials-helper';
 import type { CredentialsOverwrites } from '@/credentials-overwrites';
 import { CredentialNotFoundError } from '@/errors/credential-not-found.error';
 import type { LoadNodesAndCredentials } from '@/load-nodes-and-credentials';
-import type { ExternalSecretsConfig } from '@/modules/external-secrets.ee/external-secrets.config';
+import type { ExternalSecretsConfig } from '@/modules/external-secrets/external-secrets.config';
 import type { PolicyEnforcementService } from '@/policy/policy-enforcement.service';
 import type { AiGatewayService } from '@/services/ai-gateway.service';
 
@@ -1903,7 +1903,7 @@ describe('CredentialsHelper', () => {
 			dynamicCredentialProxy.setResolverProvider(mockCredentialResolutionProvider);
 
 			const { CredentialResolutionError } = await import(
-				'@/modules/dynamic-credentials.ee/errors/credential-resolution.error.js'
+				'@/modules/dynamic-credentials/errors/credential-resolution.error.js'
 			);
 
 			const resolvableCredentialEntity = {
@@ -1937,7 +1937,7 @@ describe('CredentialsHelper', () => {
 			dynamicCredentialProxy.setResolverProvider(mockCredentialResolutionProvider);
 
 			const { CredentialResolutionError } = await import(
-				'@/modules/dynamic-credentials.ee/errors/credential-resolution.error.js'
+				'@/modules/dynamic-credentials/errors/credential-resolution.error.js'
 			);
 
 			const resolvableCredentialEntity = {

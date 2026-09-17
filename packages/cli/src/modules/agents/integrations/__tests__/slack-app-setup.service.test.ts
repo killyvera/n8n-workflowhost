@@ -10,7 +10,7 @@ import type { CredentialsFinderService } from '@/credentials/credentials-finder.
 import type { CredentialsOverwrites } from '@/credentials-overwrites';
 import { BadRequestError } from '@/errors/response-errors/bad-request.error';
 import type { CacheService } from '@/services/cache/cache.service';
-import type { ProjectService } from '@/services/project.service.ee';
+import type { ProjectService } from '@/services/project.service';
 import type { UrlService } from '@/services/url.service';
 
 import type { AgentIntegrationManagementService } from '../../agent-integration-management.service';

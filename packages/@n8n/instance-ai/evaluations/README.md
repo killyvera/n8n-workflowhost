@@ -10,7 +10,7 @@ Six harnesses live here:
 - **`eval:agents`** — standalone Agent build cases from the LangTracer `agents` suite (author new ones in `data/agents/`)
 - **`eval:subagent`** — legacy command name for the workflow-build compatibility corpus; it drives the live orchestrator/skill build path, scored by binary checks
 - **`eval:discovery`** — orchestrator in-process, scored against required or forbidden tool/dispatch events (no n8n server)
-- **`eval:pairwise`** — live orchestrator workflow builds, scored by an LLM judge panel against do/don't lists. Intended for head-to-head comparison with `ai-workflow-builder.ee` on the same dataset
+- **`eval:pairwise`** — live orchestrator workflow builds, scored by an LLM judge panel against do/don't lists. Intended for head-to-head comparison with `ai-workflow-builder` on the same dataset
 - **`eval:computer-use`** — grades the computer-use agent (file / OAuth / doc-reading tasks) against fixtures; see [`computer-use/README.md`](computer-use/README.md)
 
 > **Writing a test case?** This README is the reference and quick-start. Use the [`create-instance-ai-eval` skill](../../../../.agents/skills/create-instance-ai-eval/SKILL.md) for the shared process and workflow cases. Use the [`create-agent-builder-eval` skill](../../../../.agents/skills/create-agent-builder-eval/SKILL.md) for standalone Agent cases. To source cases from real failures, see [sourcing from LangTracer + LangSmith](../../../../.agents/skills/create-instance-ai-eval/sourcing-cases.md).
@@ -565,7 +565,7 @@ Pairwise evals score a built workflow against the dataset's `dos` / `donts`
 criteria using an LLM judge panel (3 judges by default, majority vote on
 `pairwise_primary`, mean fraction of criteria satisfied on
 `pairwise_diagnostic`). The point is **head-to-head comparison with
-`ai-workflow-builder.ee`** on the same dataset (default
+`ai-workflow-builder`** on the same dataset (default
 `instance-ai-builder-from-plans`), so the judge panel, defaults, and metric keys
 are imported from that package directly.
 
@@ -632,7 +632,7 @@ Each run writes a self-contained directory:
 .output/pairwise/<run>/
 ├── summary.json           # totals: pass rate, avg diagnostic, build failures by class, interactivity counters
 ├── results.jsonl          # one line per example: prompt, dos/donts, captured workflow, build metadata, feedback rows
-└── workflows/<id>.json    # normalized workflow JSON (matches SimpleWorkflow shape from ai-workflow-builder.ee)
+└── workflows/<id>.json    # normalized workflow JSON (matches SimpleWorkflow shape from ai-workflow-builder)
 ```
 
 Feedback stays in the local output files. Upload to LangSmith is a separate
@@ -661,13 +661,13 @@ from this assumption — investigate any non-zero count:
 
 ### Comparison report
 
-After running both `ai-workflow-builder.ee/evaluations/cli` (the baseline) and
+After running both `ai-workflow-builder/evaluations/cli` (the baseline) and
 `eval:pairwise` against the same dataset, generate an HTML side-by-side
 report:
 
 ```bash
 pnpm eval:pairwise:compare \
-  --ee-dir   ../ai-workflow-builder.ee/evaluations/.output/pairwise/<ts> \
+  --ee-dir   ../ai-workflow-builder/evaluations/.output/pairwise/<ts> \
   --ia-dir   .output/pairwise/<ts> \
   --out      .output/pairwise/comparison.html
 ```

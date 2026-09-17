@@ -2,7 +2,7 @@
  * AI root node types (Agent/Chain/vendor LLM) and their pinned-item output
  * shapes. Keep in sync with new agent/chain types in
  * `@n8n/n8n-nodes-langchain` and with the editor's canonical list in
- * `editor-ui/src/features/ai/evaluation.ee/evaluation.constants.ts`.
+ * `editor-ui/src/features/ai/evaluation/evaluation.constants.ts`.
  */
 
 export const AGENT_NODE_TYPE = '@n8n/n8n-nodes-langchain.agent';

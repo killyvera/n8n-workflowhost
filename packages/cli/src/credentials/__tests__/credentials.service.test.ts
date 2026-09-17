@@ -39,16 +39,16 @@ import { BadRequestError } from '@/errors/response-errors/bad-request.error';
 import { ForbiddenError } from '@/errors/response-errors/forbidden.error';
 import type { EventService } from '@/events/event.service';
 import type { ExternalHooks } from '@/external-hooks';
-import type { ExternalSecretsConfig } from '@/modules/external-secrets.ee/external-secrets.config';
-import type { SecretsProviderAccessCheckService } from '@/modules/external-secrets.ee/secret-provider-access-check.service.ee';
+import type { ExternalSecretsConfig } from '@/modules/external-secrets/external-secrets.config';
+import type { SecretsProviderAccessCheckService } from '@/modules/external-secrets/secret-provider-access-check.service';
 import {
 	DCR_MANAGED_CREDENTIAL_FIELDS,
 	type DcrManagedCredentialField,
 } from '@/oauth/dcr-managed-fields';
-import * as checkAccess from '@/permissions.ee/check-access';
+import * as checkAccess from '@/permissions/check-access';
 import type { CredentialsTester } from '@/services/credentials-tester.service';
 import type { OwnershipService } from '@/services/ownership.service';
-import type { ProjectService } from '@/services/project.service.ee';
+import type { ProjectService } from '@/services/project.service';
 import type { RoleService } from '@/services/role.service';
 
 import { mockExistingCredential } from './credentials.test-data';

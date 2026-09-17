@@ -24,7 +24,6 @@ for (const key of [
 axios.defaults.proxy = false;
 
 vi.mock('@sentry/node');
-vi.mock('@n8n_io/license-sdk');
 vi.mock('@/telemetry');
 vi.mock('@/eventbus/message-event-bus/message-event-bus');
 vi.mock('@/push');

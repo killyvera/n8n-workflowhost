@@ -1,0 +1,18 @@
+# NOTICE
+
+This repository is a modified fork of n8n (https://github.com/n8n-io/n8n).
+
+## License notes
+
+- Community / Sustainable Use License code remains under [LICENSE.md](LICENSE.md).
+- n8n Enterprise-licensed source (paths that used `.ee` in the file or directory name,
+  and [LICENSE_EE.md](LICENSE_EE.md)) has been **removed** from this fork.
+- Premium-style features in this fork are provided by **local entitlements** and
+  **OSS replacement modules** under the Sustainable Use License of this fork.
+  They do **not** use `@n8n_io/license-sdk` or n8n GmbH license certificates.
+- This fork does **not** relicense the product as OSI-approved open source.
+  The Sustainable Use License still applies to the retained n8n community code.
+- Cloud-only billing features (AI credits, AI gateway, promotions to n8n Cloud,
+  instance reporting to n8n) are disabled or removed.
+
+Modified from n8n by the n8n-workflowhost maintainers.

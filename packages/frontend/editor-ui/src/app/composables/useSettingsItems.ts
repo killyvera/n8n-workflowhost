@@ -11,7 +11,7 @@ import { useUIStore } from '../stores/ui.store';
 import { useSettingsStore } from '@n8n/stores/settings.store';
 import { hasPermission } from '../utils/rbac/permissions';
 import { MIGRATION_REPORT_TARGET_VERSION } from '@n8n/api-types';
-import { PROMOTIONS_SETTINGS_VIEW } from '@/features/integrations/promotions.ee/promotions.constants';
+import { PROMOTIONS_SETTINGS_VIEW } from '@/features/integrations/promotions/promotions.constants';
 import { usePromotionsEnabled } from '@/features/shared/promotions/usePromotionsEnabled';
 
 export function useSettingsItems() {

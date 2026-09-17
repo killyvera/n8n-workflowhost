@@ -5,14 +5,14 @@ export {
 	type ActivityEventInput,
 	type ActivityFeedQuery,
 } from './activity-event.repository';
-export { AgentEvalDatasetRepository } from './agent-eval-dataset.repository.ee';
-export { AgentEvalRunRepository } from './agent-eval-run.repository.ee';
-export { AgentEvalResultRepository } from './agent-eval-result.repository.ee';
-export { AgentEvalRatingRepository } from './agent-eval-rating.repository.ee';
+export { AgentEvalDatasetRepository } from './agent-eval-dataset.repository';
+export { AgentEvalRunRepository } from './agent-eval-run.repository';
+export { AgentEvalResultRepository } from './agent-eval-result.repository';
+export { AgentEvalRatingRepository } from './agent-eval-rating.repository';
 export { AiPreferenceRepository } from './ai-preference.repository';
 export type { ReadableProjects } from './ai-preference.repository';
-export { AnnotationTagMappingRepository } from './annotation-tag-mapping.repository.ee';
-export { AnnotationTagRepository } from './annotation-tag.repository.ee';
+export { AnnotationTagMappingRepository } from './annotation-tag-mapping.repository';
+export { AnnotationTagRepository } from './annotation-tag.repository';
 export { AiBuilderTemporaryWorkflowRepository } from './ai-builder-temporary-workflow.repository';
 export { ApiKeyRepository } from './api-key.repository';
 export { AuthIdentityRepository } from './auth-identity.repository';
@@ -47,7 +47,7 @@ export { ScopeRepository } from './scope.repository';
 export { InvalidAuthTokenRepository } from './invalid-auth-token.repository';
 export { InstanceCredentialAssignmentRepository } from './instance-credential-assignment.repository';
 export { LicenseMetricsRepository } from './license-metrics.repository';
-export { ProjectPoolSettingsRepository } from './project-pool-settings.repository.ee';
+export { ProjectPoolSettingsRepository } from './project-pool-settings.repository';
 export { ProjectRelationRepository } from './project-relation.repository';
 export { ProjectRepository, type ProjectListOptions } from './project.repository';
 export { RoleRepository } from './role.repository';
@@ -75,8 +75,8 @@ export {
 export { ProcessedDataRepository } from './processed-data.repository';
 export { SettingsRepository } from './settings.repository';
 export { TagRepository } from './tag.repository';
-export { TestCaseExecutionRepository } from './test-case-execution.repository.ee';
-export { TestRunRepository, type TestRunSummary } from './test-run.repository.ee';
+export { TestCaseExecutionRepository } from './test-case-execution.repository';
+export { TestRunRepository, type TestRunSummary } from './test-run.repository';
 export { VariablesRepository } from './variables.repository';
 export { WorkflowHistoryRepository } from './workflow-history.repository';
 export { WorkflowStatisticsRepository } from './workflow-statistics.repository';
@@ -123,5 +123,5 @@ export {
 } from './workflow-dependency.repository';
 export { WebhookRepository } from './webhook.repository';
 export { UserRepository } from './user.repository';
-export { SecretsProviderConnectionRepository } from './secrets-provider-connection.repository.ee';
-export { ProjectSecretsProviderAccessRepository } from './project-secrets-provider-access.repository.ee';
+export { SecretsProviderConnectionRepository } from './secrets-provider-connection.repository';
+export { ProjectSecretsProviderAccessRepository } from './project-secrets-provider-access.repository';

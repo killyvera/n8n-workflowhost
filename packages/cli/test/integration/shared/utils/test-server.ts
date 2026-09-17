@@ -207,7 +207,7 @@ export const setupTestServer = ({
 						break;
 
 					case 'annotationTags':
-						await import('@/controllers/annotation-tags.controller.ee.js');
+						await import('@/controllers/annotation-tags.controller.js');
 						break;
 
 					case 'credentials':
@@ -227,7 +227,7 @@ export const setupTestServer = ({
 						break;
 
 					case 'variables':
-						await import('@/environments.ee/variables/variables.controller.ee.js');
+						await import('@/environments/variables/variables.controller.js');
 						break;
 
 					case 'ai-preferences':
@@ -250,7 +250,7 @@ export const setupTestServer = ({
 					}
 
 					case 'eventBus':
-						await import('@/modules/log-streaming.ee/log-streaming.controller.js');
+						await import('@/modules/log-streaming/log-streaming.controller.js');
 						break;
 
 					case 'auth':
@@ -270,26 +270,26 @@ export const setupTestServer = ({
 						break;
 
 					case 'ldap': {
-						const { LdapService } = await import('@/modules/ldap.ee/ldap.service.ee.js');
-						await import('@/modules/ldap.ee/ldap.controller.ee.js');
+						const { LdapService } = await import('@/modules/ldap/ldap.service.js');
+						await import('@/modules/ldap/ldap.controller.js');
 						testServer.license.enable('feat:ldap');
 						await Container.get(LdapService).init();
 						break;
 					}
 
 					case 'saml': {
-						const { SamlService } = await import('@/modules/sso-saml/saml.service.ee.js');
+						const { SamlService } = await import('@/modules/sso-saml/saml.service.js');
 						await Container.get(SamlService).init();
-						await import('@/modules/sso-saml/saml.controller.ee.js');
+						await import('@/modules/sso-saml/saml.controller.js');
 						const { setSamlLoginEnabled } = await import('@/modules/sso-saml/saml-helpers.js');
 						await setSamlLoginEnabled(true);
 						break;
 					}
 
 					case 'oidc': {
-						const { OidcService } = await import('@/modules/sso-oidc/oidc.service.ee.js');
+						const { OidcService } = await import('@/modules/sso-oidc/oidc.service.js');
 						await Container.get(OidcService).init();
-						await import('@/modules/sso-oidc/oidc.controller.ee.js');
+						await import('@/modules/sso-oidc/oidc.controller.js');
 						break;
 					}
 
@@ -301,7 +301,7 @@ export const setupTestServer = ({
 					}
 
 					case 'sourceControl':
-						await import('@/modules/source-control.ee/source-control.controller.ee.js');
+						await import('@/modules/source-control/source-control.controller.js');
 						break;
 
 					case 'community-packages':
@@ -357,11 +357,11 @@ export const setupTestServer = ({
 						break;
 
 					case 'roleMappingRule':
-						await import('@/modules/provisioning.ee/role-mapping-rule.controller.ee.js');
+						await import('@/modules/provisioning/role-mapping-rule.controller.js');
 						break;
 
 					case 'provisioning':
-						await import('@/modules/provisioning.ee/provisioning.controller.ee.js');
+						await import('@/modules/provisioning/provisioning.controller.js');
 						break;
 
 					case 'dynamic-node-parameters':
@@ -373,7 +373,7 @@ export const setupTestServer = ({
 						break;
 
 					case 'evaluation':
-						await import('@/evaluation.ee/test-runs.controller.ee.js');
+						// Evaluation EE module removed in this fork; no controller to load.
 						break;
 
 					case 'ai':
@@ -384,7 +384,7 @@ export const setupTestServer = ({
 						break;
 
 					case 'externalSecrets':
-						await import('@/modules/external-secrets.ee/external-secrets.module.js');
+						await import('@/modules/external-secrets/external-secrets.module.js');
 						break;
 
 					case 'insights':
@@ -396,7 +396,7 @@ export const setupTestServer = ({
 						break;
 
 					case 'workflow-reviews':
-						await import('@/modules/workflow-reviews.ee/workflow-reviews.module.js');
+						// Workflow reviews EE module removed in this fork.
 						break;
 
 					case 'mcp':

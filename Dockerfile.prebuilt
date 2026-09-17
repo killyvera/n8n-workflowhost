@@ -1,0 +1,42 @@
+# syntax=docker/dockerfile:1.7
+# Package a host-built `compiled/` tree (from `pnpm run build:n8n`).
+# Use when the deploy host cannot compile inside Docker, or apt mirrors fail.
+#
+#   pnpm run build:n8n
+#   docker compose -f docker-compose.yml build
+#   (set DOCKERFILE=Dockerfile.prebuilt)
+#
+ARG NODE_VERSION=26.7.0
+ARG N8N_VERSION=workflowhost
+
+FROM node:${NODE_VERSION}-bookworm AS runtime
+
+ENV NODE_ENV=production \
+	N8N_RELEASE_TYPE=stable \
+	N8N_PORT=5678 \
+	N8N_LISTEN_ADDRESS=0.0.0.0 \
+	N8N_USER_FOLDER=/home/node \
+	SHELL=/bin/sh
+
+RUN mkdir -p /home/node/.n8n /usr/local/lib/node_modules \
+	&& chown -R node:node /home/node
+
+COPY --chown=node:node compiled /usr/local/lib/node_modules/n8n
+COPY --chown=root:root docker/images/n8n/docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN chmod +x /docker-entrypoint.sh \
+	&& ln -sf /usr/local/lib/node_modules/n8n/bin/n8n /usr/local/bin/n8n
+
+WORKDIR /home/node
+USER node
+EXPOSE 5678
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=5 \
+	CMD node -e "fetch('http://127.0.0.1:'+(process.env.N8N_PORT||5678)+'/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+LABEL org.opencontainers.image.title="n8n-workflowhost" \
+	org.opencontainers.image.description="Self-hosted n8n fork with local entitlements" \
+	org.opencontainers.image.source="https://github.com/killyvera/n8n-workflowhost" \
+	org.opencontainers.image.version="${N8N_VERSION}"

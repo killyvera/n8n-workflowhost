@@ -28,7 +28,7 @@ export default defineConfig(
 			'evaluations/.data/**',
 			'evaluations/.output/**',
 			'.output/**',
-			// Deep-imports ai-workflow-builder.ee's evaluations source, so it sits outside
+			// Deep-imports ai-workflow-builder's evaluations source, so it sits outside
 			// evaluations/tsconfig.json (see its exclude) and the eslint project service.
 			'evaluations/cli/pairwise.ts',
 		],
@@ -75,7 +75,7 @@ export default defineConfig(
 		// credential-setup browser lane) therefore belong in devDependencies, and
 		// the default rule — which treats every non-test file as production —
 		// would otherwise force them into `dependencies` and ship them to every
-		// install. Same arrangement as @n8n/ai-workflow-builder.ee's evaluations.
+		// install. Same arrangement as @n8n/ai-workflow-builder's evaluations.
 		files: ['evaluations/**/*.ts'],
 		rules: {
 			'import-x/no-extraneous-dependencies': ['error', { devDependencies: true }],

@@ -102,7 +102,7 @@ export default defineConfig(
 	},
 	{
 		// Multi-agent parameter guides intentionally document wire-format parameters
-		// (consumed by the legacy parameter-updater chain in ai-workflow-builder.ee,
+		// (consumed by the legacy parameter-updater chain in ai-workflow-builder,
 		// not by the code-builder or instance-ai SDK paths).
 		files: ['src/prompts/node-guidance/parameter-guides/**/*.ts'],
 		rules: {

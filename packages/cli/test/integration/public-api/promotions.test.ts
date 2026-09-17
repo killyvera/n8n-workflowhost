@@ -5,12 +5,12 @@ import { Container } from '@n8n/di';
 import { createDeferredPromise } from '@n8n/utils/promise/deferred-promise';
 
 import { BadRequestError } from '@/errors/response-errors/bad-request.error';
-import { PromotionConfigRepository } from '@/modules/promotions.ee/database/repositories/promotion-config.repository';
-import { PromotionConnectionProjectRepository } from '@/modules/promotions.ee/database/repositories/promotion-connection-project.repository';
-import { PromotionConnectionRepository } from '@/modules/promotions.ee/database/repositories/promotion-connection.repository';
-import { PromotionProviderRepository } from '@/modules/promotions.ee/database/repositories/promotion-provider.repository';
-import { PromotionProvidersService } from '@/modules/promotions.ee/promotion-providers.service';
-import { PromotionsService } from '@/modules/promotions.ee/promotions.service';
+import { PromotionConfigRepository } from '@/modules/promotions/database/repositories/promotion-config.repository';
+import { PromotionConnectionProjectRepository } from '@/modules/promotions/database/repositories/promotion-connection-project.repository';
+import { PromotionConnectionRepository } from '@/modules/promotions/database/repositories/promotion-connection.repository';
+import { PromotionProviderRepository } from '@/modules/promotions/database/repositories/promotion-provider.repository';
+import { PromotionProvidersService } from '@/modules/promotions/promotion-providers.service';
+import { PromotionsService } from '@/modules/promotions/promotions.service';
 import { createOwnerWithApiKey } from '@test-integration/db/users';
 import { setupTestServer } from '@test-integration/utils';
 

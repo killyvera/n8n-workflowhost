@@ -1,21 +1,79 @@
-# Deploy automático desde el repo (Railway, Render, Coolify, Dokploy, etc.).
-# Usa la imagen oficial de n8n: build rápido, sin compilar el monorepo.
-# `latest` = canal estable; cada redeploy tira la versión más nueva publicada.
-# Para fijar una versión: ARG N8N_VERSION=2.39.5 (o la que necesites).
-#
-# En la plataforma:
-# - Exponer/mapear el puerto 5678 (o N8N_PORT)
-# - Montar volumen persistente en /home/node/.n8n
-# - Configurar WEBHOOK_URL, N8N_ENCRYPTION_KEY y (opcional) Postgres vía env
+# syntax=docker/dockerfile:1.7
+# Build THIS fork (local entitlements). Multi-stage: pnpm build:n8n → runtime.
 
-ARG N8N_VERSION=latest
-FROM docker.n8n.io/n8nio/n8n:${N8N_VERSION}
+ARG NODE_VERSION=26.7.0
 
+# -----------------------------------------------------------------------------
+# Builder
+# -----------------------------------------------------------------------------
+FROM node:${NODE_VERSION}-bookworm AS builder
+
+# Prefer a mirror when deb.debian.org returns 503 (common on some networks).
+RUN set -eux; \
+	if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
+	  sed -i 's|http://deb.debian.org/debian|http://ftp.debian.org/debian|g; s|http://deb.debian.org/debian-security|http://security.debian.org/debian-security|g' /etc/apt/sources.list.d/debian.sources; \
+	elif [ -f /etc/apt/sources.list ]; then \
+	  sed -i 's|deb.debian.org|ftp.debian.org|g' /etc/apt/sources.list; \
+	fi; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends python3 make g++ git ca-certificates; \
+	rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g pnpm@12.3.4
+
+WORKDIR /src
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json tsconfig.json tsconfig.configs.json ./
+COPY patches ./patches
+COPY scripts ./scripts
+COPY packages ./packages
+COPY biome.jsonc ./
+COPY NOTICE LICENSE.md README.md ./
+
+ENV CI=true \
+	NODE_ENV=production \
+	NODE_OPTIONS=--max-old-space-size=8192 \
+	TURBO_TELEMETRY_DISABLED=1 \
+	DO_NOT_TRACK=1
+
+RUN pnpm install --frozen-lockfile
+RUN pnpm run build:n8n
+
+# -----------------------------------------------------------------------------
+# Runtime — full bookworm (has ca-certificates); no apt at runtime (avoids mirror 503s)
+# -----------------------------------------------------------------------------
+FROM node:${NODE_VERSION}-bookworm AS runtime
+
+ARG N8N_VERSION=workflowhost
 ENV NODE_ENV=production \
+	N8N_RELEASE_TYPE=stable \
 	N8N_PORT=5678 \
-	N8N_LISTEN_ADDRESS=0.0.0.0
+	N8N_LISTEN_ADDRESS=0.0.0.0 \
+	N8N_USER_FOLDER=/home/node \
+	SHELL=/bin/sh
 
+RUN mkdir -p /home/node/.n8n /usr/local/lib/node_modules \
+	&& chown -R node:node /home/node
+
+COPY --from=builder --chown=node:node /src/compiled /usr/local/lib/node_modules/n8n
+COPY --chown=root:root docker/images/n8n/docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN chmod +x /docker-entrypoint.sh \
+	&& find /usr/local/lib/node_modules/n8n/bin -type f -exec sed -i 's/\r$//' {} + \
+	&& sed -i 's/\r$//' /docker-entrypoint.sh \
+	&& ln -sf /usr/local/lib/node_modules/n8n/bin/n8n /usr/local/bin/n8n
+
+WORKDIR /home/node
+USER node
 EXPOSE 5678
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=90s --retries=5 \
 	CMD node -e "fetch('http://127.0.0.1:'+(process.env.N8N_PORT||5678)+'/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+
+# Node as PID1 is fine for compose/PaaS; entrypoint execs n8n.
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+LABEL org.opencontainers.image.title="n8n-workflowhost" \
+	org.opencontainers.image.description="Self-hosted n8n fork with local entitlements (no Enterprise license server)" \
+	org.opencontainers.image.source="https://github.com/killyvera/n8n-workflowhost" \
+	org.opencontainers.image.version="${N8N_VERSION}"

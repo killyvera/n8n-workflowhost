@@ -69,7 +69,7 @@ import type { DynamicNodeParametersService } from '@/services/dynamic-node-param
 import type { FolderService } from '@/services/folder.service';
 import type { InstanceWriteAccessService } from '@/services/instance-write-access.service';
 import { NodeResourceExplorerService } from '@/services/node-resource-explorer.service';
-import type { ProjectService } from '@/services/project.service.ee';
+import type { ProjectService } from '@/services/project.service';
 import type { RoleService } from '@/services/role.service';
 import type { TagService } from '@/services/tag.service';
 import type { Telemetry } from '@/telemetry';
@@ -77,7 +77,7 @@ import type { WorkflowRunner } from '@/workflow-runner';
 import type { WorkflowFinderService } from '@/workflows/workflow-finder.service';
 import type { WorkflowHistoryService } from '@/workflows/workflow-history/workflow-history.service';
 import type { WorkflowService } from '@/workflows/workflow.service';
-import type { EnterpriseWorkflowService } from '@/workflows/workflow.service.ee';
+import type { EnterpriseWorkflowService } from '@/workflows/workflow.feature.service';
 
 import type { InstanceAiSettingsService } from '../instance-ai-settings.service';
 import { InstanceAiAdapterService } from '../instance-ai.adapter.service';

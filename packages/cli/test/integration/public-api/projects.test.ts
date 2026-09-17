@@ -13,7 +13,7 @@ import type { MockInstance } from 'vitest';
 
 import { FeatureNotLicensedError } from '@/errors/feature-not-licensed.error';
 import { EventService } from '@/events/event.service';
-import { ProvisioningService } from '@/modules/provisioning.ee/provisioning.service.ee';
+import { ProvisioningService } from '@/modules/provisioning/provisioning.service';
 import { Telemetry } from '@/telemetry';
 import {
 	createMemberWithApiKey,

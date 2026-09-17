@@ -66,11 +66,18 @@ const badgedPlanName = computed(() => {
 	};
 });
 
-const isCommunity = computed(() => usageStore.planName.toLowerCase() === 'community');
+const isCommunity = computed(() => {
+	const name = usageStore.planName.toLowerCase();
+	return name === 'community' || name.includes('self-hosted');
+});
 
-const isCommunityEditionRegistered = computed(
-	() => usageStore.planName.toLowerCase() === 'registered community',
-);
+const isCommunityEditionRegistered = computed(() => {
+	const name = usageStore.planName.toLowerCase();
+	return name === 'registered community' || name.includes('self-hosted');
+});
+
+/** This fork does not use n8n activation keys or subscription portals. */
+const localEntitlementsOnly = computed(() => true);
 
 const canUserRegisterCommunityPlus = computed(
 	() => getResourcePermissions(usersStore.currentUser?.globalScopes).community.register,
@@ -240,7 +247,15 @@ const openCommunityRegisterModal = () => {
 				</span>
 			</N8nHeading>
 
-			<N8nNotice v-if="isCommunity && canUserRegisterCommunityPlus" class="mt-0" theme="warning">
+			<N8nNotice v-if="localEntitlementsOnly" class="mt-0" theme="success">
+				{{ locale.baseText('settings.usageAndPlan.localEntitlements.notice') }}
+			</N8nNotice>
+
+			<N8nNotice
+				v-else-if="isCommunity && canUserRegisterCommunityPlus"
+				class="mt-0"
+				theme="warning"
+			>
 				<I18nT keypath="settings.usageAndPlan.callOut" scope="global">
 					<template #link>
 						<N8nButton
@@ -283,7 +298,7 @@ const openCommunityRegisterModal = () => {
 
 			<N8nInfoTip>{{ locale.baseText('settings.usageAndPlan.activeWorkflows.hint') }}</N8nInfoTip>
 
-			<div :class="$style.buttons">
+			<div v-if="!localEntitlementsOnly" :class="$style.buttons">
 				<N8nButton
 					variant="subtle"
 					v-if="canUserActivateLicense"

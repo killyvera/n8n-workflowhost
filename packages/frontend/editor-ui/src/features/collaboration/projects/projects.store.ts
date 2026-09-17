@@ -5,9 +5,9 @@ import { useRootStore } from '@n8n/stores/useRootStore';
 import * as dataTableApi from '@/features/core/dataTable/dataTable.api';
 import * as projectsApi from './projects.api';
 import * as workflowsApi from '@/app/api/workflows';
-import * as workflowsEEApi from '@/app/api/workflows.ee';
+import * as workflowsEEApi from '@/app/api/workflows.feature';
 import * as credentialsApi from '@/features/credentials/credentials.api';
-import * as credentialsEEApi from '@/features/credentials/credentials.ee.api';
+import * as credentialsEEApi from '@/features/credentials/credentials.feature.api';
 import {
 	getProjectPoolSettings,
 	getProjectSecretProviderConnectionsByProjectId,
@@ -29,7 +29,7 @@ import type {
 	UpdateProjectDto,
 	UpdateProjectPoolSettingsDto,
 } from '@n8n/api-types';
-import { useSourceControlStore } from '@/features/integrations/sourceControl.ee/sourceControl.store';
+import { useSourceControlStore } from '@/features/integrations/sourceControl/sourceControl.store';
 import { hasRole } from '@/app/utils/rbac/checks';
 import { useFavoritesStore } from '@/app/stores/favorites.store';
 

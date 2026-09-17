@@ -2,7 +2,7 @@
  * Expression context reference — documents variables available inside expr()
  *
  * Consumed by:
- * - Code Builder Agent (ai-workflow-builder.ee)
+ * - Code Builder Agent (ai-workflow-builder)
  * - MCP Server (external SDK reference)
  * - Instance AI workflow-builder skill
  */

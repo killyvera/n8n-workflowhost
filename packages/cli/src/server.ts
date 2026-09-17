@@ -32,7 +32,7 @@ import { Telemetry } from '@/telemetry';
 import * as requestPath from '@/utils/request-path';
 
 import '@/controllers/active-workflows.controller';
-import '@/controllers/annotation-tags.controller.ee';
+import '@/controllers/annotation-tags.controller';
 import '@/controllers/auth.controller';
 import '@/controllers/binary-data.controller';
 import '@/controllers/change-email.controller';
@@ -49,7 +49,7 @@ import '@/controllers/orchestration.controller';
 import '@/controllers/owner.controller';
 import '@/controllers/password-reset.controller';
 import '@/controllers/project.controller';
-import '@/controllers/project-pool-settings.controller.ee';
+import '@/controllers/project-pool-settings.controller';
 import '@/controllers/role.controller';
 import '@/controllers/tags.controller';
 import '@/controllers/translation.controller';
@@ -64,10 +64,6 @@ import '@/events/events.controller';
 import '@/executions/executions.controller';
 import '@/node-execution/ephemeral-node-executor';
 import '@/license/license.controller';
-import '@/evaluation.ee/test-runs.controller.ee';
-import '@/evaluation.ee/evaluation-config.controller';
-import '@/evaluation.ee/evaluation-collections.controller.ee';
-import '@/evaluation.ee/insights/eval-insights.controller.ee';
 import '@/workflows/workflow-history/workflow-history.controller';
 import '@/workflows/workflows.controller';
 import '@/modules/workflow-index/workflow-dependency.controller';
@@ -162,7 +158,7 @@ export class Server extends AbstractServer {
 		// ----------------------------------------
 
 		try {
-			await import('@/environments.ee/variables/variables.controller.ee.js');
+			await import('@/environments/variables/variables.controller.js');
 		} catch (error) {
 			this.logger.warn(`Variables initialization failed: ${(error as Error).message}`);
 		}

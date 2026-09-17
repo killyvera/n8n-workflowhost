@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------------------
 // Normalize a captured WorkflowJSON (from instance-ai) into the SimpleWorkflow
-// shape that ai-workflow-builder.ee's pairwise judges expect.
+// shape that ai-workflow-builder's pairwise judges expect.
 //
 // The pairwise panel serializes the workflow to JSON text and feeds it to
 // LLM judges, so formatting parity is load-bearing: any extra field — ids,
@@ -18,7 +18,7 @@ import type { WorkflowJSON } from '@n8n/workflow-sdk';
 import { deepCopy } from 'n8n-workflow';
 import type { IWorkflowBase } from 'n8n-workflow';
 
-/** Same computed type as ai-workflow-builder.ee's `SimpleWorkflow`, declared locally so
+/** Same computed type as ai-workflow-builder's `SimpleWorkflow`, declared locally so
  *  the eval typecheck program doesn't pull the builder package's source tree in. */
 export type SimpleWorkflow = Pick<IWorkflowBase, 'name' | 'nodes' | 'connections'>;
 

@@ -3,15 +3,15 @@
 //
 // Pulls the pairwise dataset from LangSmith or a local file, builds one
 // workflow per example via the normal Instance AI orchestrator, and scores it
-// with the same pairwise judge panel used by ai-workflow-builder.ee.
+// with the same pairwise judge panel used by ai-workflow-builder.
 //
 // Results are written to an output directory so a later step can build
-// a head-to-head comparison report against the ai-workflow-builder.ee
+// a head-to-head comparison report against the ai-workflow-builder
 // baseline.
 // ---------------------------------------------------------------------------
 
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-base-to-string, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
-// `SimpleWorkflow` is imported from `ai-workflow-builder.ee` via deep relative
+// `SimpleWorkflow` is imported from `ai-workflow-builder` via deep relative
 // paths; the `@/*` alias used inside that package collides with instance-ai's
 // own `@/*` mapping during transitive type-checking, so the type resolves to
 // `error` here. The `csvCell()` helper also calls `String(value)` on `unknown`
@@ -30,8 +30,8 @@ import {
 	createPairwiseEvaluator,
 	type Feedback,
 	type SimpleWorkflow,
-} from '../../../ai-workflow-builder.ee/evaluations/evaluators/pairwise';
-import { DEFAULTS } from '../../../ai-workflow-builder.ee/evaluations/support/constants';
+} from '../../../ai-workflow-builder/evaluations/evaluators/pairwise';
+import { DEFAULTS } from '../../../ai-workflow-builder/evaluations/support/constants';
 import { N8nClient, type WorkflowResponse } from '../clients/n8n-client';
 import { buildWorkflow } from '../harness/build-workflow';
 import { cleanupBuild } from '../harness/cleanup';

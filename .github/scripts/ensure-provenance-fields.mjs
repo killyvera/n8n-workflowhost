@@ -3,7 +3,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getMonorepoProjects } from './pnpm-utils.mjs';
 
-const commonFiles = ['LICENSE.md', 'LICENSE_EE.md'];
+const commonFiles = ['LICENSE.md', 'NOTICE'];
 
 const baseDir = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const packages = await getMonorepoProjects();

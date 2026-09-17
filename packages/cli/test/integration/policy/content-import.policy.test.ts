@@ -38,9 +38,9 @@ import { mock } from 'vitest-mock-extended';
 
 import type { IWorkflowToImport } from '@/interfaces';
 import { PolicyDecisionService } from '@/modules/policy-infrastructure/policy-decision.service';
-import { SourceControlContextFactory } from '@/modules/source-control.ee/source-control-context.factory';
-import { SourceControlImportService } from '@/modules/source-control.ee/source-control-import.service.ee';
-import { SourceControlScopedService } from '@/modules/source-control.ee/source-control-scoped.service';
+import { SourceControlContextFactory } from '@/modules/source-control/source-control-context.factory';
+import { SourceControlImportService } from '@/modules/source-control/source-control-import.service';
+import { SourceControlScopedService } from '@/modules/source-control/source-control-scoped.service';
 import { PolicyEnforcementService } from '@/policy/policy-enforcement.service';
 import { ImportService } from '@/services/import.service';
 import { WorkflowFinderService } from '@/workflows/workflow-finder.service';

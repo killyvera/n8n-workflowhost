@@ -43,10 +43,10 @@ import type { Mock, Mocked } from 'vitest';
 import { mock } from 'vitest-mock-extended';
 
 import type { IWorkflowToImport } from '@/interfaces';
-import { SourceControlContextFactory } from '@/modules/source-control.ee/source-control-context.factory';
-import { SourceControlImportService } from '@/modules/source-control.ee/source-control-import.service.ee';
-import { SourceControlScopedService } from '@/modules/source-control.ee/source-control-scoped.service';
-import type { ExportableCredential } from '@/modules/source-control.ee/types/exportable-credential';
+import { SourceControlContextFactory } from '@/modules/source-control/source-control-context.factory';
+import { SourceControlImportService } from '@/modules/source-control/source-control-import.service';
+import { SourceControlScopedService } from '@/modules/source-control/source-control-scoped.service';
+import type { ExportableCredential } from '@/modules/source-control/types/exportable-credential';
 import { PolicyEnforcementService } from '@/policy/policy-enforcement.service';
 import { PolicyViolationError } from '@/policy/policy-violation.error';
 import { WorkflowFinderService } from '@/workflows/workflow-finder.service';

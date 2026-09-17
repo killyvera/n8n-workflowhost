@@ -31,7 +31,7 @@ import { validate as uuidValidate } from 'uuid';
 
 import { JwtService } from './jwt.service';
 import { OwnershipService } from './ownership.service';
-import { ProjectService } from './project.service.ee';
+import { ProjectService } from './project.service';
 import { PublicApiKeyService } from './public-api-key.service';
 import { RoleService } from './role.service';
 
@@ -47,7 +47,7 @@ import { License } from '@/license';
 import { PostHogClient } from '@/posthog';
 import type { UserRequest } from '@/requests';
 import { UrlService } from '@/services/url.service';
-import { isSsoCurrentAuthenticationMethod } from '@/sso.ee/sso-helpers';
+import { isSsoCurrentAuthenticationMethod } from '@/sso/sso-helpers';
 import { UserManagementMailer } from '@/user-management/email';
 
 export const CHANGE_ROLE_ERROR_MESSAGES = {
@@ -705,9 +705,7 @@ export class UserService {
 
 	/** Lazy: these services import `UserService`, so a static import would be a value-import cycle. */
 	private async getProvisioningService() {
-		const { ProvisioningService } = await import(
-			'@/modules/provisioning.ee/provisioning.service.ee.js'
-		);
+		const { ProvisioningService } = await import('@/modules/provisioning/provisioning.service.js');
 
 		return Container.get(ProvisioningService);
 	}

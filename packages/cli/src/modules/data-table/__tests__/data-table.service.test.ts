@@ -20,7 +20,7 @@ import { DataTableNotFoundError } from '../errors/data-table-not-found.error';
 import { DataTableValidationError } from '../errors/data-table-validation.error';
 
 import { EventService } from '@/events/event.service';
-import { ProjectNotFoundError, ProjectService } from '@/services/project.service.ee';
+import { ProjectNotFoundError, ProjectService } from '@/services/project.service';
 import { RoleService } from '@/services/role.service';
 
 describe('DataTableService', () => {

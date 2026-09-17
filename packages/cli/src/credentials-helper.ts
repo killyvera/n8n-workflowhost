@@ -41,7 +41,7 @@ import {
 	DCR_MANAGED_CREDENTIAL_FIELDS,
 	MANAGED_OAUTH_PINNED_FIELDS,
 } from '@/oauth/dcr-managed-fields';
-import { ExternalSecretsConfig } from '@/modules/external-secrets.ee/external-secrets.config';
+import { ExternalSecretsConfig } from '@/modules/external-secrets/external-secrets.config';
 import { PolicyEnforcementService } from '@/policy/policy-enforcement.service';
 import { AiGatewayService } from '@/services/ai-gateway.service';
 

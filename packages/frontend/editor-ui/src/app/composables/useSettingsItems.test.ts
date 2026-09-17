@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue';
 
-import { PROMOTIONS_SETTINGS_VIEW } from '@/features/integrations/promotions.ee/promotions.constants';
+import { PROMOTIONS_SETTINGS_VIEW } from '@/features/integrations/promotions/promotions.constants';
 import { useSettingsItems } from './useSettingsItems';
 import { VIEWS } from '../constants';
 

@@ -1,10 +1,8 @@
 import { CommunityRegisteredRequestDto } from '@n8n/api-types';
 import { AuthenticatedRequest } from '@n8n/db';
 import { Get, Post, RestController, GlobalScope, Body } from '@n8n/decorators';
-import type { AxiosError } from 'axios';
 import { InstanceSettings } from 'n8n-core';
 
-import { BadRequestError } from '@/errors/response-errors/bad-request.error';
 import { LicenseRequest } from '@/requests';
 import { UrlService } from '@/services/url.service';
 
@@ -26,18 +24,7 @@ export class LicenseController {
 	@Post('/enterprise/request_trial')
 	@GlobalScope('license:manage')
 	async requestEnterpriseTrial(req: AuthenticatedRequest) {
-		try {
-			await this.licenseService.requestEnterpriseTrial(req.user);
-		} catch (error: unknown) {
-			if (error instanceof Error) {
-				const errorMsg =
-					(error as AxiosError<{ message: string }>).response?.data?.message ?? error.message;
-
-				throw new BadRequestError(errorMsg);
-			} else {
-				throw new BadRequestError('Failed to request trial');
-			}
-		}
+		await this.licenseService.requestEnterpriseTrial(req.user);
 	}
 
 	@Post('/enterprise/community-registered')

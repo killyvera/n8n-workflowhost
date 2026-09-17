@@ -11,6 +11,7 @@
 import { $, echo, fs, chalk } from 'zx';
 import path from 'path';
 import os from 'os';
+import { fileURLToPath } from 'url';
 
 // Check if running in a CI environment
 const isCI = process.env.CI === 'true';
@@ -23,7 +24,7 @@ const excludeTestController =
 $.verbose = !isCI;
 process.env.FORCE_COLOR = isCI ? '0' : '1';
 
-const scriptDir = path.dirname(new URL(import.meta.url).pathname);
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const isInScriptsDir = path.basename(scriptDir) === 'scripts';
 const rootDir = isInScriptsDir ? path.join(scriptDir, '..') : scriptDir;
 
@@ -100,7 +101,11 @@ try {
 	installProcess.pipe(process.stdout);
 	await installProcess;
 
-	const buildProcess = $`cd ${config.rootDir} && pnpm build --summarize`;
+	// Production image only needs the n8n app graph (+ task-runner). Full-repo
+	// `pnpm build` also compiles CI-only packages (janitor, etc.) and can fail
+	// the Docker image for unrelated tooling.
+	const buildProcess =
+		$`cd ${config.rootDir} && pnpm exec turbo run build --filter=n8n... --filter=@n8n/task-runner... --summarize`;
 	buildProcess.pipe(process.stdout);
 	await buildProcess;
 

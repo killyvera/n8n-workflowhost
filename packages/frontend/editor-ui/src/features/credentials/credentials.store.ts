@@ -9,7 +9,7 @@ import type {
 	IUsedCredential,
 } from './credentials.types';
 import * as credentialsApi from './credentials.api';
-import * as credentialsEeApi from './credentials.ee.api';
+import * as credentialsEeApi from './credentials.feature.api';
 import { EnterpriseEditionFeature } from '@/app/constants';
 import { STORES } from '@n8n/stores';
 import { i18n } from '@n8n/i18n';

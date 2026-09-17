@@ -21,9 +21,9 @@ import type { ExternalHooks, WorkflowLifecycleHookActor } from '@/external-hooks
 import type { McpSettingsService } from '@/modules/mcp/mcp.settings.service';
 import type { InstanceRedactionEnforcementService } from '@/modules/redaction/instance-redaction-enforcement.service';
 import type { NodeTypes } from '@/node-types';
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 import type { PolicyEnforcementService } from '@/policy/policy-enforcement.service';
-import type { ProjectService } from '@/services/project.service.ee';
+import type { ProjectService } from '@/services/project.service';
 import type { FolderService } from '@/services/folder.service';
 import * as WorkflowHelpers from '@/workflow-helpers';
 import type { WorkflowHookContextService } from '@/workflow-hook-context.service';
@@ -31,9 +31,9 @@ import { WorkflowCreationService } from '@/workflows/workflow-creation.service';
 import type { WorkflowFinderService } from '@/workflows/workflow-finder.service';
 import type { WorkflowHistoryService } from '@/workflows/workflow-history/workflow-history.service';
 import type { WorkflowValidationService } from '@/workflows/workflow-validation.service';
-import type { EnterpriseWorkflowService } from '@/workflows/workflow.service.ee';
+import type { EnterpriseWorkflowService } from '@/workflows/workflow.feature.service';
 
-vi.mock('@/permissions.ee/check-access');
+vi.mock('@/permissions/check-access');
 vi.mock('@/workflow-helpers');
 vi.mock('@/generic-helpers');
 

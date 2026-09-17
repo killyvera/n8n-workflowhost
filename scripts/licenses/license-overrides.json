@@ -55,11 +55,6 @@
       "license": "MIT",
       "source": "https://github.com/rhashimoto/wa-sqlite — LICENSE file in published tarball confirms MIT. Package is installed via GitHub tarball URL so npm registry metadata is absent; no license field in package.json. Version-agnostic: the PURL emitted by cdxgen for tarball installs can vary (version field vs. commit SHA vs. qualifiers) depending on lockfile format and cdxgen version; name-keyed matching is stable across those variations."
     },
-    "@n8n_io/license-sdk": {
-      "license": "LicenseRef-n8n-enterprise",
-      "source": "n8n-io/license-management — ships LICENSE_EE.md (n8n Enterprise License). EE-only runtime component; not under the Sustainable Use License. Version-agnostic: license is stable across SDK versions. FIRST_PARTY_PATTERNS would otherwise incorrectly stamp it as LicenseRef-n8n-sustainable-use.",
-      "skipDiskText": true
-    },
     "@n8n_io/ai-assistant-sdk": {
       "license": "LicenseRef-n8n-enterprise",
       "source": "n8n-io/ai-assistant-service — ships LICENSE_EE.md (n8n Enterprise License). EE-only runtime component; not under the Sustainable Use License. Version-agnostic: license is stable across SDK versions.",

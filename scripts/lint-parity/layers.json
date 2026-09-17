@@ -23,7 +23,7 @@
 		"packages/@n8n/agents",
 		"packages/@n8n/ai-node-sdk",
 		"packages/@n8n/ai-utilities",
-		"packages/@n8n/ai-workflow-builder.ee",
+		"packages/@n8n/ai-workflow-builder",
 		"packages/@n8n/backend-common",
 		"packages/@n8n/backend-network",
 		"packages/@n8n/backend-test-utils",

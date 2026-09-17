@@ -1,10 +1,10 @@
 // ---------------------------------------------------------------------------
 // Side-by-side comparison report for two pairwise eval runs
-// (typically: ai-workflow-builder.ee vs instance-ai).
+// (typically: ai-workflow-builder vs instance-ai).
 //
 // Usage:
 //   pnpm tsx evaluations/cli/compare-pairwise.ts \
-//     --ee-dir   ../ai-workflow-builder.ee/evaluations/.output/pairwise/<ts> \
+//     --ee-dir   ../ai-workflow-builder/evaluations/.output/pairwise/<ts> \
 //     --ia-dir   .output/pairwise/<ts> \
 //     --out      .output/pairwise/comparison.html
 //

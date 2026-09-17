@@ -36,7 +36,7 @@
 		},
 		{
 			"name": "ProjectPoolSettings",
-			"path": "packages/@n8n/db/src/entities/project-pool-settings.ee.ts",
+			"path": "packages/@n8n/db/src/entities/project-pool-settings.ts",
 			"reason": "Per-project worker-pool config; scoped to the deleted project and dropped via FK cascade."
 		},
 		{
@@ -81,12 +81,12 @@
 		},
 		{
 			"name": "WorkflowReviewRequest",
-			"path": "packages/@n8n/db/src/entities/workflow-review-request.ee.ts",
+			"path": "packages/@n8n/db/src/entities/workflow-review-request.ts",
 			"reason": "Not transferred with the project. Open reviews are closed when their workflow is archived, moved to another project, or deleted (workflow lifecycle hooks); rows are removed via the projectId FK cascade when the source project itself is deleted, as in ownership-transfer flows. WorkflowReviewActivity and WorkflowReviewActivityComment ride this entity's cascade and have no projectId of their own, so they never appear in this manifest."
 		},
 		{
 			"name": "PromotionConnectionProject",
-			"path": "packages/cli/src/modules/promotions.ee/database/entities/promotion-connection-project.entity.ts",
+			"path": "packages/cli/src/modules/promotions/database/entities/promotion-connection-project.entity.ts",
 			"reason": "Promotion configuration for the project (which connection it is linked to), not user data. Dropped via the projectId FK cascade when the source project is deleted, as in ownership-transfer flows."
 		},
 		{

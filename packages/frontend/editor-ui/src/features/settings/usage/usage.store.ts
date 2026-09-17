@@ -13,7 +13,7 @@ export type UsageTelemetry = {
 	quota: number;
 };
 
-const DEFAULT_PLAN_NAME = 'Community';
+const DEFAULT_PLAN_NAME = 'Self-Hosted OSS';
 const DEFAULT_STATE: UsageState = {
 	loading: true,
 	data: {
@@ -29,7 +29,7 @@ const DEFAULT_STATE: UsageState = {
 			},
 		},
 		license: {
-			planId: '',
+			planId: 'self-hosted-oss',
 			planName: DEFAULT_PLAN_NAME,
 		},
 	},
@@ -61,11 +61,7 @@ export const useUsageStore = defineStore('usage', () => {
 	const commonSubscriptionAppUrlQueryParams = computed(
 		() => `instanceid=${instanceId.value}&version=${appVersion.value}`,
 	);
-	const subscriptionAppUrl = computed(() =>
-		settingsStore.settings.license.environment === 'production'
-			? 'https://subscription.n8n.io'
-			: 'https://staging-subscription.n8n.io',
-	);
+	const subscriptionAppUrl = computed(() => '');
 
 	const setLoading = (loading: boolean) => {
 		state.loading = loading;
@@ -81,31 +77,25 @@ export const useUsageStore = defineStore('usage', () => {
 		setData(data);
 	};
 
-	const activateLicense = async (activationKey: string, eulaUri?: string) => {
-		const data = await usageApi.activateLicenseKey(rootStore.restApiContext, {
-			activationKey,
-			eulaUri,
-		});
-		setData(data);
+	/** Activation is a no-op against the remote license server in this fork. */
+	const activateLicense = async (_activationKey: string, _eulaUri?: string) => {
+		await getLicenseInfo();
 		await settingsStore.getSettings();
 		await settingsStore.getModuleSettings();
 	};
 
 	const refreshLicenseManagementToken = async () => {
-		try {
-			const data = await usageApi.renewLicense(rootStore.restApiContext);
-			setData(data);
-		} catch (error) {
-			await getLicenseInfo();
-		}
+		await getLicenseInfo();
 	};
 
 	const requestEnterpriseLicenseTrial = async () => {
-		await usageApi.requestLicenseTrial(rootStore.restApiContext);
+		// Enterprise trial / n8n Cloud registration is disabled in this fork.
 	};
 
-	const registerCommunityEdition = async (email: string) =>
-		await usageApi.registerCommunityEdition(rootStore.restApiContext, { email });
+	const registerCommunityEdition = async (_email: string) => ({
+		title: 'Self-hosted OSS',
+		text: 'Local entitlements are already active. No registration with n8n Cloud is required.',
+	});
 
 	return {
 		setLoading,

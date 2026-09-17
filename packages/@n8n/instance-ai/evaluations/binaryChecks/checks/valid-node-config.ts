@@ -35,8 +35,8 @@ function toWorkflowJson(workflow: WorkflowResponse): WorkflowJSON {
  * Validates node parameters against generated Zod schemas via workflow-sdk.
  *
  * Covers both:
- * - Missing required parameters (what ai-workflow-builder.ee checked as `valid_required_parameters`)
- * - Invalid option values (what ai-workflow-builder.ee checked as `valid_options_values`)
+ * - Missing required parameters (what ai-workflow-builder checked as `valid_required_parameters`)
+ * - Invalid option values (what ai-workflow-builder checked as `valid_options_values`)
  *
  * Uses `validateWorkflow` with trigger/connectivity checks disabled (handled by
  * other binary checks), keeping only schema validation. Gracefully skips nodes

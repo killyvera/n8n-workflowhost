@@ -49,11 +49,11 @@ import { ExecutionService } from '@/executions/execution.service';
 import { IWorkflowResponse } from '@/interfaces';
 import { License } from '@/license';
 import { listQueryMiddleware } from '@/middlewares';
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 import * as ResponseHelper from '@/response-helper';
 import { NamingService } from '@/services/naming.service';
 import { OwnershipService } from '@/services/ownership.service';
-import { ProjectService } from '@/services/project.service.ee';
+import { ProjectService } from '@/services/project.service';
 import { UserManagementMailer } from '@/user-management/email';
 import * as utils from '@/utils';
 import { getWorkflowProjectDetailsSafe } from '@/workflows/utils';
@@ -66,7 +66,7 @@ import { WorkflowExecutionService } from './workflow-execution.service';
 import { WorkflowFinderService } from './workflow-finder.service';
 import { WorkflowRequest } from './workflow.request';
 import { WorkflowService } from './workflow.service';
-import { EnterpriseWorkflowService } from './workflow.service.ee';
+import { EnterpriseWorkflowService } from './workflow.feature.service';
 
 @RestController('/workflows')
 export class WorkflowsController {

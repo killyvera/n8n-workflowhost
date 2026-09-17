@@ -6,7 +6,7 @@ import { BaseModal } from './BaseModal';
 /**
  * Page object for the secret provider connection creation/edit modal.
  * Modal key: SECRETS_PROVIDER_CONNECTION_MODAL_KEY ("secretsProviderConnection")
- * Component: SecretsProviderConnectionModal.ee.vue
+ * Component: SecretsProviderConnectionModal.vue
  *
  * Used for both create mode (no providerKey) and edit mode (with providerKey).
  */

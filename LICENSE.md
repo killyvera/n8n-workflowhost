@@ -3,11 +3,9 @@
 Portions of this software are licensed as follows:
 
 - Content of branches other than the main branch (i.e. "master") are not licensed.
-- Source code files that contain ".ee." in their filename or ".ee" in their dirname are NOT licensed under
-  the Sustainable Use License.
-  To use source code files that contain ".ee." in their filename or ".ee" in their dirname you must hold a
-	valid n8n Enterprise License specifically allowing you access to such source code files and as defined
-	in "LICENSE_EE.md".
+- This fork has **removed** n8n Enterprise-licensed (`.ee`) source. See [NOTICE](NOTICE).
+  Premium-style features use local entitlements and OSS replacement modules under this
+  Sustainable Use License. No n8n Enterprise certificate is required or accepted.
 - All third party components incorporated into the n8n Software are licensed under the original license
   provided by the owner of the applicable component.
 - Content outside of the above mentioned files or restrictions is available under the "Sustainable Use

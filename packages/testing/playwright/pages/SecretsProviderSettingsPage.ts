@@ -4,7 +4,7 @@ import { BasePage } from './BasePage';
 
 /**
  * Page object for /settings/external-secrets
- * Wraps the SettingsSecretsProviders.ee.vue view.
+ * Wraps the SettingsSecretsProviders.vue view.
  */
 export class SecretsProviderSettingsPage extends BasePage {
 	async goto(): Promise<void> {

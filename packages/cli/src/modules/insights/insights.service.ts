@@ -11,7 +11,7 @@ import { InstanceSettings } from 'n8n-core';
 import { UserError } from 'n8n-workflow';
 
 import { ForbiddenError } from '@/errors/response-errors/forbidden.error';
-import { userHasScopes } from '@/permissions.ee/check-access';
+import { userHasScopes } from '@/permissions/check-access';
 import { WorkflowSharingService } from '@/workflows/workflow-sharing.service';
 
 import type { PeriodUnit, TypeUnit, ByTimeInsightType } from './database/entities/insights-shared';

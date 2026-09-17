@@ -1,0 +1,60 @@
+# n8n-workflowhost — build from THIS repo (not docker.n8n.io/n8nio/n8n).
+#
+# Full in-Docker compile (needs working apt mirrors):
+#   docker compose build
+#
+# Host compile + slim image (recommended when apt/network is flaky):
+#   pnpm run build:n8n
+#   set DOCKERFILE=Dockerfile.prebuilt
+#   docker compose build
+#
+#   docker compose up -d
+# Editor: http://localhost:5678
+
+services:
+  n8n:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE:-Dockerfile}
+      args:
+        NODE_VERSION: "26.7.0"
+        N8N_VERSION: "workflowhost"
+    image: n8n-workflowhost:local
+    container_name: n8n-workflowhost
+    restart: unless-stopped
+    ports:
+      - "${N8N_HOST_PORT:-5678}:5678"
+    environment:
+      NODE_ENV: production
+      N8N_PORT: "5678"
+      N8N_LISTEN_ADDRESS: "0.0.0.0"
+      N8N_PROTOCOL: ${N8N_PROTOCOL:-http}
+      N8N_HOST: ${N8N_HOST:-localhost}
+      N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL:-${WEBHOOK_URL:-http://localhost:5678/}}
+      GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-America/Mexico_City}
+      TZ: ${TZ:-America/Mexico_City}
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:-change-me-before-production}
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_PERSONALIZATION_ENABLED: "false"
+      N8N_VERSION_NOTIFICATIONS_ENABLED: "false"
+      N8N_PUBLIC_API_DISABLED: "false"
+      N8N_DISABLED_MODULES: ${N8N_DISABLED_MODULES:-}
+      # Prefer legacy until isolated-vm is rebuilt into the image for this Node ABI.
+      N8N_EXPRESSION_ENGINE: ${N8N_EXPRESSION_ENGINE:-legacy}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:5678/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+volumes:
+  n8n_data:

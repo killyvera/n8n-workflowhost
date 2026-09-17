@@ -33,7 +33,7 @@ vi.mock('./oauthCallback', () => ({
 }));
 
 vi.mock('../credentials.api');
-vi.mock('../credentials.ee.api');
+vi.mock('../credentials.feature.api');
 
 const credential = (overrides: Partial<ICredentialsResponse> = {}): ICredentialsResponse =>
 	mock<ICredentialsResponse>({

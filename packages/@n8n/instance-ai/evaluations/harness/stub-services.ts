@@ -64,7 +64,7 @@ export interface StubServiceHandle {
 export interface CreateStubServicesOptions {
 	/**
 	 * Absolute path to the nodes.json file produced by
-	 * `ai-workflow-builder.ee/pnpm export:nodes`. Required — the agent's
+	 * `ai-workflow-builder/pnpm export:nodes`. Required — the agent's
 	 * workflow-builder skill path needs a non-empty node catalogue.
 	 */
 	nodesJsonPath: string;
@@ -367,7 +367,7 @@ async function loadNodeCatalogue(jsonPath: string): Promise<NodeCatalogue> {
 		const message = error instanceof Error ? error.message : String(error);
 		throw new Error(
 			`Could not read node catalogue at ${jsonPath}: ${message}\n` +
-				'Run `pnpm export:nodes` in packages/@n8n/ai-workflow-builder.ee to generate it, ' +
+				'Run `pnpm export:nodes` in packages/@n8n/ai-workflow-builder to generate it, ' +
 				'or pass --nodes-json <path> to point at an existing file.',
 		);
 	}
@@ -596,7 +596,7 @@ function stubExecutionResult(message: string) {
 
 /**
  * Resolve the default node-catalogue path inside
- * `packages/@n8n/ai-workflow-builder.ee/evaluations/`. Pass `--nodes-json
+ * `packages/@n8n/ai-workflow-builder/evaluations/`. Pass `--nodes-json
  * <path>` (or `nodesJsonPath`) to point at a different file.
  */
 export function defaultNodesJsonPath(): string {
@@ -605,7 +605,7 @@ export function defaultNodesJsonPath(): string {
 		'..',
 		'..',
 		'..',
-		'ai-workflow-builder.ee',
+		'ai-workflow-builder',
 		'evaluations',
 	);
 	return path.join(siblingPackage, 'nodes.json');

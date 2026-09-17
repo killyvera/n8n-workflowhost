@@ -64,7 +64,6 @@ describe('eligibleModules', () => {
 			'provisioning',
 			'breaking-changes',
 			'source-control',
-			'dynamic-credentials',
 			'chat-hub',
 			'sso-oidc',
 			'sso-saml',
@@ -83,7 +82,6 @@ describe('eligibleModules', () => {
 			'n8n-packages',
 			'runtime-credentials',
 			'mcp-registry',
-			'workflow-reviews',
 			'instance-ai',
 		]);
 	});
@@ -101,7 +99,6 @@ describe('eligibleModules', () => {
 			'provisioning',
 			'breaking-changes',
 			'source-control',
-			'dynamic-credentials',
 			'chat-hub',
 			'sso-oidc',
 			'sso-saml',
@@ -120,7 +117,6 @@ describe('eligibleModules', () => {
 			'n8n-packages',
 			'runtime-credentials',
 			'mcp-registry',
-			'workflow-reviews',
 			'instance-ai',
 			'agents',
 		]);

@@ -5,7 +5,7 @@ import { BaseModal } from './BaseModal';
 /**
  * Page object for the delete secrets provider confirmation modal.
  * Modal key: DELETE_SECRETS_PROVIDER_MODAL_KEY ("deleteSecretsProvider")
- * Component: DeleteSecretsProviderModal.ee.vue
+ * Component: DeleteSecretsProviderModal.vue
  *
  * When credentials reference the provider, a confirmation input is required
  * where the user must type the exact provider name before deletion is enabled.

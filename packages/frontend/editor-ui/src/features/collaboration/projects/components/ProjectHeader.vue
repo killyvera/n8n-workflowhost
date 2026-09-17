@@ -10,7 +10,7 @@ import ProjectTabs from './ProjectTabs.vue';
 import ProjectIcon from './ProjectIcon.vue';
 import { getResourcePermissions } from '@n8n/permissions';
 import { EnterpriseEditionFeature, VIEWS } from '@/app/constants';
-import { useSourceControlStore } from '@/features/integrations/sourceControl.ee/sourceControl.store';
+import { useSourceControlStore } from '@/features/integrations/sourceControl/sourceControl.store';
 import ProjectCreateResource from './ProjectCreateResource.vue';
 import { useRootStore } from '@n8n/stores/useRootStore';
 import { useSettingsStore } from '@n8n/stores/settings.store';
@@ -27,8 +27,8 @@ import { generateNanoId } from '@n8n/utils/generate-nano-id';
 import { useAgentPermissions } from '@/features/agents/composables/useAgentPermissions';
 import ReadyToRunButton from '@/features/workflows/readyToRun/components/ReadyToRunButton.vue';
 import { usePromotionsEnabled } from '@/features/shared/promotions/usePromotionsEnabled';
-import { PROMOTION_SELECT_MODAL_KEY } from '@/features/integrations/promotions.ee/promotions.constants';
-import { getPromotableChanges } from '@/features/integrations/promotions.ee/promotions.api';
+import { PROMOTION_SELECT_MODAL_KEY } from '@/features/integrations/promotions/promotions.constants';
+import { getPromotableChanges } from '@/features/integrations/promotions/promotions.api';
 
 import {
 	N8nButton,
@@ -39,7 +39,7 @@ import {
 	N8nText,
 	N8nTooltip,
 } from '@n8n/design-system';
-import { VARIABLE_MODAL_KEY } from '@/features/settings/environments.ee/environments.constants';
+import { VARIABLE_MODAL_KEY } from '@/features/settings/environments/environments.constants';
 import { useTelemetry } from '@n8n/composables/useTelemetry';
 import { useAgentTelemetry } from '@/features/agents/composables/useAgentTelemetry';
 import { useUsersStore } from '@n8n/stores/users.store';
