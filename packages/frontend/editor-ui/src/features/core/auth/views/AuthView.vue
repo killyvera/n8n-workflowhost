@@ -41,6 +41,7 @@ const onSecondaryClick = () => {
 <template>
 	<div :class="$style.container">
 		<div :class="$style.brandBlock">
+			<N8nText size="small" color="text-light">{{ BOTO_BRANDING.poweredByLabel }}</N8nText>
 			<BotoLogo size="compact" />
 		</div>
 		<div v-if="subtitle" :class="$style.textContainer">
@@ -58,11 +59,7 @@ const onSecondaryClick = () => {
 				<SSOLogin v-if="withSso" />
 			</N8nFormBox>
 		</div>
-		<div :class="$style.footer">
-			<div :class="$style.poweredBy">
-				<N8nText size="small" color="text-light">{{ BOTO_BRANDING.poweredByLabel }}</N8nText>
-				<BotoLogo size="compact" />
-			</div>
+		<div :class="$style.hosting">
 			<N8nText tag="p" size="small" color="text-light">
 				{{ BOTO_BRANDING.hostedBy }}
 				<N8nLink :to="BOTO_BRANDING.hosting" new-window size="small">
@@ -90,7 +87,9 @@ const onSecondaryClick = () => {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	gap: var(--spacing--2xs);
 	margin-bottom: var(--spacing--2xl);
+	text-align: center;
 }
 
 .textContainer {
@@ -102,23 +101,8 @@ const onSecondaryClick = () => {
 	padding-bottom: var(--spacing--m);
 }
 
-.footer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: var(--spacing--m);
-	margin-top: var(--spacing--l);
+.hosting {
 	text-align: center;
-}
-
-.poweredBy {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: var(--spacing--2xs);
-
-	:global([data-test-id='boto-logo']) {
-		width: 64px;
-	}
+	margin-top: var(--spacing--l);
 }
 </style>
