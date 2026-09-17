@@ -34,7 +34,11 @@ ENV CI=true \
 	PNPM_NETWORK_CONCURRENCY=8 \
 	PNPM_CHILD_CONCURRENCY=4
 
-RUN pnpm install --frozen-lockfile
+# pnpm 12.3.4 tries to rewrite packageManagerDependencies under --frozen-lockfile and
+# fails (ERR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE). We already install the pinned
+# pnpm globally above, so drop the packageManager pin for this install only.
+RUN node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); delete p.packageManager; fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');" \
+	&& NODE_ENV= pnpm install --frozen-lockfile
 ENV NODE_ENV=production
 RUN pnpm run build:n8n
 
