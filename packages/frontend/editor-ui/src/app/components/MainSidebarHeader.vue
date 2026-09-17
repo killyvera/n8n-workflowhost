@@ -63,8 +63,8 @@ const {
 			[$style.collapsed]: isCollapsed,
 		}"
 	>
-		<RouterLink v-if="!isCollapsed" :to="{ name: VIEWS.HOMEPAGE }" :class="$style.logo">
-			<BotoLogo size="small" :collapsed="isCollapsed" variant="dark" />
+		<RouterLink :to="{ name: VIEWS.HOMEPAGE }" :class="$style.logo">
+			<BotoLogo size="small" :collapsed="isCollapsed" variant="light" />
 			<N8nTooltip
 				v-if="sourceControlStore.preferences.branchReadOnly && !isCollapsed"
 				placement="bottom"

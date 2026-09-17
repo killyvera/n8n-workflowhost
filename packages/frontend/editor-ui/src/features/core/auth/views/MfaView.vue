@@ -192,7 +192,7 @@ onMounted(() => {
 
 <template>
 	<div :class="$style.container">
-		<BotoLogo size="large" variant="dark" />
+		<BotoLogo size="compact" variant="dark" />
 		<N8nCard>
 			<div :class="$style.headerContainer">
 				<N8nHeading size="xlarge" color="text-dark">{{

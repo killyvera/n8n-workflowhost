@@ -3,18 +3,17 @@ import { computed, useCssModule } from 'vue';
 import { BOTO_BRANDING } from '@/config/boto-branding';
 import LogoDark from '@/assets/boto/logo-dark.svg';
 import LogoLight from '@/assets/boto/logo-light.svg';
-import LogoMark from '@/assets/boto/logo-mark.svg';
 
 const props = withDefaults(
 	defineProps<{
-		/** large = auth/setup; small = sidebar */
-		size?: 'large' | 'small';
+		/** large = auth hero; compact = auth inline; small = sidebar */
+		size?: 'large' | 'compact' | 'small';
 		collapsed?: boolean;
-		/** Prefer dark-fill assets on light auth backgrounds */
+		/** dark = near-black fill (light UI); light = near-white fill (dark sidebar) */
 		variant?: 'auto' | 'dark' | 'light';
 	}>(),
 	{
-		size: 'large',
+		size: 'compact',
 		collapsed: false,
 		variant: 'auto',
 	},
@@ -22,26 +21,22 @@ const props = withDefaults(
 
 const $style = useCssModule();
 
-const useDarkFill = computed(() => {
-	if (props.variant === 'dark') return true;
-	if (props.variant === 'light') return false;
-	return props.size === 'large';
-});
-
-const showWordmark = computed(() => {
-	if (props.size === 'large') return true;
-	return !props.collapsed;
+/** Sidebar / dark surfaces need the light (white) wordmark. */
+const useLightFill = computed(() => {
+	if (props.variant === 'light') return true;
+	if (props.variant === 'dark') return false;
+	return props.size === 'small';
 });
 
 const containerClasses = computed(() => {
-	if (props.size === 'large') {
-		return [$style.logoContainer, $style.large];
+	const classes = [$style.logoContainer];
+	if (props.size === 'large') classes.push($style.large);
+	else if (props.size === 'compact') classes.push($style.compact);
+	else {
+		classes.push($style.sidebar);
+		classes.push(props.collapsed ? $style.sidebarCollapsed : $style.sidebarExpanded);
 	}
-	return [
-		$style.logoContainer,
-		$style.sidebar,
-		props.collapsed ? $style.sidebarCollapsed : $style.sidebarExpanded,
-	];
+	return classes;
 });
 </script>
 
@@ -52,9 +47,8 @@ const containerClasses = computed(() => {
 		:title="BOTO_BRANDING.productName"
 		:aria-label="BOTO_BRANDING.productName"
 	>
-		<LogoMark v-if="!showWordmark" :class="$style.mark" />
-		<LogoDark v-else-if="useDarkFill" :class="$style.logo" />
-		<LogoLight v-else :class="$style.logo" />
+		<LogoLight v-if="useLightFill" :class="$style.logo" />
+		<LogoDark v-else :class="$style.logo" />
 	</div>
 </template>
 
@@ -63,33 +57,53 @@ const containerClasses = computed(() => {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-shrink: 0;
 }
 
 .logo {
-	width: 100%;
-	height: auto;
-	display: block;
-}
-
-.mark {
-	width: 28px;
+	width: auto;
 	height: auto;
 	display: block;
 }
 
 .large {
-	width: 220px;
+	width: 180px;
+
+	.logo {
+		width: 100%;
+	}
+}
+
+.compact {
+	width: 72px;
+
+	.logo {
+		width: 100%;
+	}
 }
 
 .sidebar {
 	justify-content: flex-start;
+	height: 22px;
 }
 
 .sidebarExpanded {
-	width: 120px;
+	width: auto;
+	max-width: 120px;
+
+	.logo {
+		height: 22px;
+		width: auto;
+	}
 }
 
 .sidebarCollapsed {
-	width: 28px;
+	width: auto;
+	max-width: 36px;
+
+	.logo {
+		height: 20px;
+		width: auto;
+	}
 }
 </style>

@@ -40,13 +40,14 @@ const onSecondaryClick = () => {
 
 <template>
 	<div :class="$style.container">
-		<BotoLogo size="large" variant="dark" />
-		<div :class="$style.brandMeta">
-			<N8nText size="large" bold>{{ BOTO_BRANDING.productName }}</N8nText>
-			<N8nText size="small" color="text-light">{{ BOTO_BRANDING.tagline }}</N8nText>
-			<N8nText size="small" color="text-light">
-				{{ BOTO_BRANDING.poweredBy }} · {{ BOTO_BRANDING.basedOn }}
-			</N8nText>
+		<div :class="$style.brandRow">
+			<BotoLogo size="compact" variant="dark" />
+			<div :class="$style.brandText">
+				<N8nText size="medium" bold>{{ BOTO_BRANDING.shortName }}</N8nText>
+				<N8nText size="small" color="text-light">
+					{{ BOTO_BRANDING.poweredBy }} · {{ BOTO_BRANDING.basedOn }}
+				</N8nText>
+			</div>
 		</div>
 		<div v-if="subtitle" :class="$style.textContainer">
 			<N8nText size="large">{{ subtitle }}</N8nText>
@@ -62,9 +63,6 @@ const onSecondaryClick = () => {
 			>
 				<SSOLogin v-if="withSso" />
 			</N8nFormBox>
-		</div>
-		<div :class="$style.hosting">
-			<N8nText size="small" color="text-light">{{ BOTO_BRANDING.hostingName }}</N8nText>
 		</div>
 	</div>
 </template>
@@ -85,25 +83,29 @@ body {
 	}
 }
 
-.textContainer {
-	text-align: center;
+.brandRow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing--xs);
+	margin-bottom: var(--spacing--l);
 }
 
-.brandMeta {
+.brandText {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	gap: var(--spacing--3xs);
-	margin: var(--spacing--m) 0 var(--spacing--l);
+	align-items: flex-start;
+	gap: var(--spacing--5xs);
+	min-width: 0;
+}
+
+.textContainer {
 	text-align: center;
+	margin-bottom: var(--spacing--m);
 }
 
 .formContainer {
 	padding-bottom: var(--spacing--xl);
-}
-
-.hosting {
-	margin-top: var(--spacing--m);
-	text-align: center;
 }
 </style>
