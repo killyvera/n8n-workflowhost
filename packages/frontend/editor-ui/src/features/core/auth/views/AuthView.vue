@@ -72,13 +72,18 @@ const onSecondaryClick = () => {
 
 <style lang="scss" module>
 .container {
+	box-sizing: border-box;
 	display: flex;
-	align-items: center;
 	flex-direction: column;
-	padding-top: var(--spacing--2xl);
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+	padding: 4vh 4vw;
 
 	> * {
-		width: 352px;
+		width: min(352px, 92vw);
 	}
 }
 
@@ -87,22 +92,26 @@ const onSecondaryClick = () => {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: var(--spacing--2xs);
-	margin-bottom: var(--spacing--2xl);
+	gap: 0.6vh;
+	margin-bottom: 3.5vh;
 	text-align: center;
 }
 
 .textContainer {
 	text-align: center;
-	margin-bottom: var(--spacing--m);
+	margin-bottom: 2vh;
 }
 
 .formContainer {
-	padding-bottom: var(--spacing--m);
+	padding-bottom: 0;
 }
 
 .hosting {
+	display: flex;
+	justify-content: center;
+	margin-top: 3.5vh;
+	padding-top: 1.5vh;
 	text-align: center;
-	margin-top: var(--spacing--l);
+	opacity: 0.85;
 }
 </style>

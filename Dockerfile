@@ -24,13 +24,18 @@ COPY packages ./packages
 COPY biome.jsonc ./
 COPY NOTICE LICENSE.md README.md ./
 
+# CI/DOCKER_BUILD skip lefthook in scripts/prepare.mjs.
+# Keep NODE_ENV unset during install so build tooling (devDeps) is installed.
 ENV CI=true \
-	NODE_ENV=production \
+	DOCKER_BUILD=1 \
 	NODE_OPTIONS=--max-old-space-size=4096 \
 	TURBO_TELEMETRY_DISABLED=1 \
-	DO_NOT_TRACK=1
+	DO_NOT_TRACK=1 \
+	PNPM_NETWORK_CONCURRENCY=8 \
+	PNPM_CHILD_CONCURRENCY=4
 
 RUN pnpm install --frozen-lockfile
+ENV NODE_ENV=production
 RUN pnpm run build:n8n
 
 # -----------------------------------------------------------------------------
