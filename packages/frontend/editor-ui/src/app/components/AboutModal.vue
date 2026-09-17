@@ -13,6 +13,7 @@ import { getThirdPartyLicenses } from '@n8n/rest-api-client';
 
 import { ElCol, ElRow } from 'element-plus';
 import { N8nButton, N8nLink, N8nText } from '@n8n/design-system';
+import { BOTO_BRANDING } from '@/config/boto-branding';
 const modalBus = createEventBus();
 const toast = useToast();
 const i18n = useI18n();
@@ -68,6 +69,29 @@ const copyDebugInfoToClipboard = async () => {
 		<template #content>
 			<div :class="$style.container">
 				<ElRow>
+					<ElCol :span="24">
+						<N8nText>
+							{{ i18n.baseText('about.botoDescription') }}
+						</N8nText>
+					</ElCol>
+				</ElRow>
+				<ElRow>
+					<ElCol :span="8" class="info-name">
+						<N8nText>{{ i18n.baseText('about.product') }}</N8nText>
+					</ElCol>
+					<ElCol :span="16">
+						<N8nText>{{ BOTO_BRANDING.productName }}</N8nText>
+					</ElCol>
+				</ElRow>
+				<ElRow>
+					<ElCol :span="8" class="info-name">
+						<N8nText>{{ i18n.baseText('about.hosting') }}</N8nText>
+					</ElCol>
+					<ElCol :span="16">
+						<N8nLink :to="BOTO_BRANDING.hosting">{{ BOTO_BRANDING.hostingName }}</N8nLink>
+					</ElCol>
+				</ElRow>
+				<ElRow>
 					<ElCol :span="8" class="info-name">
 						<N8nText>{{ i18n.baseText('about.n8nVersion') }}</N8nText>
 					</ElCol>
@@ -80,7 +104,15 @@ const copyDebugInfoToClipboard = async () => {
 						<N8nText>{{ i18n.baseText('about.sourceCode') }}</N8nText>
 					</ElCol>
 					<ElCol :span="16">
-						<N8nLink to="https://github.com/n8n-io/n8n">https://github.com/n8n-io/n8n</N8nLink>
+						<N8nLink :to="BOTO_BRANDING.repository">{{ BOTO_BRANDING.repository }}</N8nLink>
+					</ElCol>
+				</ElRow>
+				<ElRow>
+					<ElCol :span="8" class="info-name">
+						<N8nText>{{ i18n.baseText('about.attribution') }}</N8nText>
+					</ElCol>
+					<ElCol :span="16">
+						<N8nText> {{ BOTO_BRANDING.poweredBy }}. {{ BOTO_BRANDING.basedOn }}. </N8nText>
 					</ElCol>
 				</ElRow>
 				<ElRow>
@@ -88,7 +120,7 @@ const copyDebugInfoToClipboard = async () => {
 						<N8nText>{{ i18n.baseText('about.license') }}</N8nText>
 					</ElCol>
 					<ElCol :span="16">
-						<N8nLink to="https://github.com/n8n-io/n8n/blob/master/LICENSE.md">
+						<N8nLink :to="`${BOTO_BRANDING.repository}/blob/master/LICENSE.md`">
 							{{ i18n.baseText('about.n8nLicense') }}
 						</N8nLink>
 					</ElCol>

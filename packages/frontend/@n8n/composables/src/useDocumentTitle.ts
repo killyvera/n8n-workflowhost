@@ -1,7 +1,7 @@
 import { ref, type Ref } from 'vue';
 
-const DEFAULT_TITLE = 'n8n';
-const DEFAULT_TAGLINE = 'Workflow Automation';
+const DEFAULT_TITLE = 'BOTO Workflow';
+const DEFAULT_TAGLINE = 'Workflow & Agent Orchestration';
 
 export type WorkflowTitleStatus =
 	| 'EXECUTING'
@@ -14,8 +14,8 @@ export type WorkflowTitleStatus =
 export interface UseDocumentTitleOptions {
 	/**
 	 * The release channel (e.g., 'stable', 'beta', 'dev').
-	 * If not provided or 'stable', the title will be 'n8n'.
-	 * Otherwise, it will be 'n8n[CHANNEL]'.
+	 * If not provided or 'stable', the title will be 'BOTO Workflow'.
+	 * Otherwise, it will be 'BOTO Workflow[CHANNEL]'.
 	 */
 	releaseChannel?: string;
 	/**

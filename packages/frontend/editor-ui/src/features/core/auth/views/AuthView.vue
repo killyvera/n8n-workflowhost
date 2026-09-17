@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { N8nLogo } from '@n8n/design-system';
 import SSOLogin from '@/features/settings/sso/components/SSOLogin.vue';
 import type { FormFieldValueUpdate, IFormBoxConfig } from '@/Interface';
-import { useSettingsStore } from '@n8n/stores/settings.store';
 import type { EmailOrLdapLoginIdAndPassword } from './SigninView.vue';
+import BotoLogo from '@/app/components/BotoLogo.vue';
+import { BOTO_BRANDING } from '@/config/boto-branding';
 
 import { N8nFormBox, N8nText } from '@n8n/design-system';
 withDefaults(
@@ -36,15 +36,18 @@ const onSubmit = (data: unknown) => {
 const onSecondaryClick = () => {
 	emit('secondaryClick');
 };
-
-const {
-	settings: { releaseChannel },
-} = useSettingsStore();
 </script>
 
 <template>
 	<div :class="$style.container">
-		<N8nLogo size="large" :release-channel="releaseChannel" />
+		<BotoLogo size="large" variant="dark" />
+		<div :class="$style.brandMeta">
+			<N8nText size="large" bold>{{ BOTO_BRANDING.productName }}</N8nText>
+			<N8nText size="small" color="text-light">{{ BOTO_BRANDING.tagline }}</N8nText>
+			<N8nText size="small" color="text-light">
+				{{ BOTO_BRANDING.poweredBy }} · {{ BOTO_BRANDING.basedOn }}
+			</N8nText>
+		</div>
 		<div v-if="subtitle" :class="$style.textContainer">
 			<N8nText size="large">{{ subtitle }}</N8nText>
 		</div>
@@ -59,6 +62,9 @@ const {
 			>
 				<SSOLogin v-if="withSso" />
 			</N8nFormBox>
+		</div>
+		<div :class="$style.hosting">
+			<N8nText size="small" color="text-light">{{ BOTO_BRANDING.hostingName }}</N8nText>
 		</div>
 	</div>
 </template>
@@ -83,7 +89,21 @@ body {
 	text-align: center;
 }
 
+.brandMeta {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing--3xs);
+	margin: var(--spacing--m) 0 var(--spacing--l);
+	text-align: center;
+}
+
 .formContainer {
 	padding-bottom: var(--spacing--xl);
+}
+
+.hosting {
+	margin-top: var(--spacing--m);
+	text-align: center;
 }
 </style>
