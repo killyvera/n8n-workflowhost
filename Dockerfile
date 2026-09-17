@@ -8,13 +8,7 @@ ARG NODE_VERSION=26.7.0
 # -----------------------------------------------------------------------------
 FROM node:${NODE_VERSION}-bookworm AS builder
 
-# Prefer a mirror when deb.debian.org returns 503 (common on some networks).
 RUN set -eux; \
-	if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
-	  sed -i 's|http://deb.debian.org/debian|http://ftp.debian.org/debian|g; s|http://deb.debian.org/debian-security|http://security.debian.org/debian-security|g' /etc/apt/sources.list.d/debian.sources; \
-	elif [ -f /etc/apt/sources.list ]; then \
-	  sed -i 's|deb.debian.org|ftp.debian.org|g' /etc/apt/sources.list; \
-	fi; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends python3 make g++ git ca-certificates; \
 	rm -rf /var/lib/apt/lists/*
@@ -32,7 +26,7 @@ COPY NOTICE LICENSE.md README.md ./
 
 ENV CI=true \
 	NODE_ENV=production \
-	NODE_OPTIONS=--max-old-space-size=8192 \
+	NODE_OPTIONS=--max-old-space-size=4096 \
 	TURBO_TELEMETRY_DISABLED=1 \
 	DO_NOT_TRACK=1
 
