@@ -1,0 +1,72 @@
+/**
+ * BOTO brand tokens (from boto-landing).
+ * Remap n8n orange primary → lime accent #b7f36b.
+ * Selectors match design-system theme layers so overrides stick.
+ */
+:root,
+body,
+body:not([data-theme]),
+[data-theme='light'],
+[data-theme='dark'] {
+	--boto-accent: #b7f36b;
+	--boto-accent-soft: rgba(183, 243, 107, 0.14);
+	--boto-accent-ink: #0b1008;
+	--boto-signal: #71d9ff;
+
+	/* HSL used by focus rings / mixins */
+	--color--primary--h: 87;
+	--color--primary--s: 85%;
+	--color--primary--l: 69%;
+
+	/* Legacy primary overrides (win over orange fallbacks) */
+	--color-primary: var(--boto-accent);
+	--color-primary-shade-1: #9ad94f;
+	--color-primary-tint-1: #c6f68a;
+	--color-primary-tint-2: #d9f9ad;
+	--color-primary-tint-3: #eefcd6;
+
+	--color--primary: var(--boto-accent);
+	--color--primary--shade-1: #9ad94f;
+	--color--primary--tint-1: #c6f68a;
+	--color--primary--tint-2: #d9f9ad;
+	--color--primary--tint-3: #eefcd6;
+
+	/* Remap orange primitives used by buttons / brand chrome */
+	--color--orange-50: #f5fce8;
+	--color--orange-100: #eefcd6;
+	--color--orange-150: #eefcd6;
+	--color--orange-200: #d9f9ad;
+	--color--orange-250: #d9f9ad;
+	--color--orange-300: #c6f68a;
+	--color--orange-400: #c0f57b;
+	--color--orange-500: var(--boto-accent);
+	--color--orange-600: #9ad94f;
+	--color--orange-700: #7bb83a;
+	--color--orange-800: #5f8f2c;
+	--color--orange-900: #466821;
+	--color--orange-950: #2a3f14;
+	--color--orange-alpha-100: rgba(183, 243, 107, 0.1);
+	--color--orange-alpha-150: rgba(183, 243, 107, 0.15);
+	--color--orange-alpha-200: rgba(183, 243, 107, 0.2);
+	--color--orange-alpha-300: rgba(183, 243, 107, 0.3);
+	--color--orange-alpha-400: rgba(183, 243, 107, 0.4);
+	--color--orange-alpha-500: rgba(183, 243, 107, 0.5);
+	--color--orange-alpha-600: rgba(183, 243, 107, 0.6);
+	--color--orange-alpha-700: rgba(183, 243, 107, 0.7);
+	--color--orange-alpha-800: rgba(183, 243, 107, 0.8);
+	--color--orange-alpha-900: rgba(183, 243, 107, 0.9);
+	--color--orange-alpha-950: rgba(183, 243, 107, 0.95);
+
+	/* Lime is light — primary button text must stay dark (boto-landing) */
+	--button--color--text--primary: var(--boto-accent-ink);
+	--button--color--text--primary--disabled: rgba(11, 16, 8, 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+	body:not([data-theme]) {
+		--button--color--text--primary: var(--boto-accent-ink);
+		--button--color--text--primary--disabled: rgba(11, 16, 8, 0.45);
+		--color--primary: var(--boto-accent);
+		--color--orange-500: var(--boto-accent);
+	}
+}

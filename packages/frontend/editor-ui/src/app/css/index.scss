@@ -2,3 +2,5 @@
 @use 'plugins';
 @use 'global';
 @use 'animations';
+/* After design-system tokens so BOTO accent wins */
+@use 'boto-theme';

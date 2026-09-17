@@ -25,6 +25,8 @@ services:
       POSTGRES_DB: ${DB_POSTGRESDB_DATABASE:-n8n}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_POSTGRESDB_PORT:-5432}:5432"
     healthcheck:
       test:
         [

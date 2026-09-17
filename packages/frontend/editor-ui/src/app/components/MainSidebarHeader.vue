@@ -12,6 +12,7 @@ import {
 	N8nNavigationDropdown,
 } from '@n8n/design-system';
 import { useI18n } from '@n8n/i18n';
+import { useSettingsStore } from '@n8n/stores/settings.store';
 import { VIEWS } from '@/app/constants';
 import { useSourceControlStore } from '@/features/integrations/sourceControl/sourceControl.store';
 import KeyboardShortcutTooltip from '@/app/components/KeyboardShortcutTooltip.vue';
@@ -28,6 +29,7 @@ const emit = defineEmits<{
 }>();
 
 const i18n = useI18n();
+const settingsStore = useSettingsStore();
 const sourceControlStore = useSourceControlStore();
 
 const createBtn = ref<InstanceType<typeof N8nNavigationDropdown>>();
@@ -64,7 +66,7 @@ const {
 		}"
 	>
 		<RouterLink :to="{ name: VIEWS.HOMEPAGE }" :class="$style.logo">
-			<BotoLogo size="small" :collapsed="isCollapsed" variant="light" />
+			<BotoLogo size="small" :collapsed="isCollapsed" />
 			<N8nTooltip
 				v-if="sourceControlStore.preferences.branchReadOnly && !isCollapsed"
 				placement="bottom"
@@ -202,10 +204,11 @@ const {
 	justify-content: space-between;
 	gap: var(--spacing--4xs);
 
-	img {
+	:global(img) {
 		position: relative;
 		left: 1px;
-		height: 20px;
+		max-height: 28px;
+		width: auto;
 		margin-right: auto;
 	}
 

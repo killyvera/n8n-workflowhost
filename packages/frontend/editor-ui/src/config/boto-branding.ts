@@ -8,7 +8,9 @@ export const BOTO_BRANDING = {
 	companyName: 'BOTO Technologies',
 	tagline: 'Workflow & Agent Orchestration',
 	poweredBy: 'Powered by BOTO',
+	poweredByLabel: 'Powered by',
 	basedOn: 'Based on n8n',
+	hostedBy: 'Hosted by',
 	modifiedDistribution: true,
 	/** Company / marketing site */
 	website: 'https://bototech.com.mx',

@@ -237,7 +237,7 @@ const handleClick = (event: MouseEvent) => {
 		--button--color--background: var(--background--brand);
 		--button--color--background-hover: var(--background--brand--hover);
 		--button--color--background-active: var(--background--brand--active);
-		--button--color: var(--color--neutral-white);
+		--button--color: var(--button--color--text--primary, var(--color--neutral-white));
 		--button--shadow: var(--shadow--xs);
 		--button--shadow--hover: var(--shadow--xs);
 		--button--shadow--active: var(--shadow--xs);

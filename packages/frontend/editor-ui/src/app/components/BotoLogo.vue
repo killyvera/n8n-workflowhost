@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { computed, useCssModule } from 'vue';
+import { useUIStore } from '@/app/stores/ui.store';
 import { BOTO_BRANDING } from '@/config/boto-branding';
-import LogoDark from '@/assets/boto/logo-dark.svg';
-import LogoLight from '@/assets/boto/logo-light.svg';
+/** BOTO-only wordmark (no "Technologies") — dark fill for light theme */
+import LogoWordDarkUrl from '@/assets/boto/logo-mark.svg?url';
+/** BOTO-only wordmark — light fill for dark theme */
+import LogoWordLightUrl from '@/assets/boto/logo-mark-word.svg?url';
+import LogoMarkPng from '@/assets/boto/logo-mark.png';
 
 const props = withDefaults(
 	defineProps<{
 		/** large = auth hero; compact = auth inline; small = sidebar */
 		size?: 'large' | 'compact' | 'small';
 		collapsed?: boolean;
-		/** dark = near-black fill (light UI); light = near-white fill (dark sidebar) */
+		/** auto follows applied theme; light/dark force a fill */
 		variant?: 'auto' | 'dark' | 'light';
 	}>(),
 	{
@@ -20,16 +24,26 @@ const props = withDefaults(
 );
 
 const $style = useCssModule();
+const uiStore = useUIStore();
 
-/** Sidebar / dark surfaces need the light (white) wordmark. */
 const useLightFill = computed(() => {
 	if (props.variant === 'light') return true;
 	if (props.variant === 'dark') return false;
-	return props.size === 'small';
+	return uiStore.appliedTheme === 'dark';
+});
+
+const isCollapsedMark = computed(() => props.size === 'small' && props.collapsed);
+
+const logoSrc = computed(() => {
+	if (isCollapsedMark.value) return LogoMarkPng;
+	return useLightFill.value ? LogoWordLightUrl : LogoWordDarkUrl;
 });
 
 const containerClasses = computed(() => {
 	const classes = [$style.logoContainer];
+	if (useLightFill.value) classes.push($style.lightFill);
+	else classes.push($style.darkFill);
+
 	if (props.size === 'large') classes.push($style.large);
 	else if (props.size === 'compact') classes.push($style.compact);
 	else {
@@ -47,8 +61,18 @@ const containerClasses = computed(() => {
 		:title="BOTO_BRANDING.productName"
 		:aria-label="BOTO_BRANDING.productName"
 	>
-		<LogoLight v-if="useLightFill" :class="$style.logo" />
-		<LogoDark v-else :class="$style.logo" />
+		<!-- Collapsed: mask so glyph follows theme without opaque PNG plate -->
+		<span
+			v-if="isCollapsedMark"
+			:class="$style.mark"
+			:style="{
+				WebkitMaskImage: `url(${LogoMarkPng})`,
+				maskImage: `url(${LogoMarkPng})`,
+			}"
+			role="img"
+			:aria-label="BOTO_BRANDING.shortName"
+		/>
+		<img v-else :src="logoSrc" :alt="BOTO_BRANDING.shortName" :class="$style.logoImg" />
 	</div>
 </template>
 
@@ -58,52 +82,64 @@ const containerClasses = computed(() => {
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
+	line-height: 0;
 }
 
-.logo {
-	width: auto;
-	height: auto;
+.lightFill {
+	color: #f4f5f2;
+}
+
+.darkFill {
+	color: #080a0c;
+}
+
+.logoImg {
 	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	background: transparent;
+}
+
+.mark {
+	display: block;
+	width: 22px;
+	height: 22px;
+	background-color: currentColor;
+	mask-repeat: no-repeat;
+	mask-position: center;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	-webkit-mask-size: contain;
 }
 
 .large {
-	width: 180px;
-
-	.logo {
-		width: 100%;
-	}
+	width: 140px;
 }
 
 .compact {
-	width: 72px;
-
-	.logo {
-		width: 100%;
-	}
+	width: 88px;
 }
 
 .sidebar {
 	justify-content: flex-start;
-	height: 22px;
+	min-height: 22px;
 }
 
 .sidebarExpanded {
-	width: auto;
-	max-width: 120px;
+	width: 72px;
 
-	.logo {
+	.logoImg {
+		width: 72px;
 		height: 22px;
-		width: auto;
+		object-fit: contain;
+		object-position: left center;
 	}
 }
 
 .sidebarCollapsed {
-	width: auto;
-	max-width: 36px;
-
-	.logo {
-		height: 20px;
-		width: auto;
-	}
+	width: 28px;
+	justify-content: center;
 }
 </style>

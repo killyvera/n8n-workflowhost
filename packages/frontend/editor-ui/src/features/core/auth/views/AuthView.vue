@@ -5,7 +5,7 @@ import type { EmailOrLdapLoginIdAndPassword } from './SigninView.vue';
 import BotoLogo from '@/app/components/BotoLogo.vue';
 import { BOTO_BRANDING } from '@/config/boto-branding';
 
-import { N8nFormBox, N8nText } from '@n8n/design-system';
+import { N8nFormBox, N8nLink, N8nText } from '@n8n/design-system';
 withDefaults(
 	defineProps<{
 		form: IFormBoxConfig;
@@ -40,14 +40,8 @@ const onSecondaryClick = () => {
 
 <template>
 	<div :class="$style.container">
-		<div :class="$style.brandRow">
-			<BotoLogo size="compact" variant="dark" />
-			<div :class="$style.brandText">
-				<N8nText size="medium" bold>{{ BOTO_BRANDING.shortName }}</N8nText>
-				<N8nText size="small" color="text-light">
-					{{ BOTO_BRANDING.poweredBy }} · {{ BOTO_BRANDING.basedOn }}
-				</N8nText>
-			</div>
+		<div :class="$style.brandBlock">
+			<BotoLogo size="compact" />
 		</div>
 		<div v-if="subtitle" :class="$style.textContainer">
 			<N8nText size="large">{{ subtitle }}</N8nText>
@@ -64,14 +58,22 @@ const onSecondaryClick = () => {
 				<SSOLogin v-if="withSso" />
 			</N8nFormBox>
 		</div>
+		<div :class="$style.footer">
+			<div :class="$style.poweredBy">
+				<N8nText size="small" color="text-light">{{ BOTO_BRANDING.poweredByLabel }}</N8nText>
+				<BotoLogo size="compact" />
+			</div>
+			<N8nText tag="p" size="small" color="text-light">
+				{{ BOTO_BRANDING.hostedBy }}
+				<N8nLink :to="BOTO_BRANDING.hosting" new-window size="small">
+					{{ BOTO_BRANDING.hostingName }}
+				</N8nLink>
+			</N8nText>
+		</div>
 	</div>
 </template>
 
 <style lang="scss" module>
-body {
-	background-color: var(--color--background--light-2);
-}
-
 .container {
 	display: flex;
 	align-items: center;
@@ -83,21 +85,12 @@ body {
 	}
 }
 
-.brandRow {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	gap: var(--spacing--xs);
-	margin-bottom: var(--spacing--l);
-}
-
-.brandText {
+.brandBlock {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	gap: var(--spacing--5xs);
-	min-width: 0;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: var(--spacing--2xl);
 }
 
 .textContainer {
@@ -106,6 +99,26 @@ body {
 }
 
 .formContainer {
-	padding-bottom: var(--spacing--xl);
+	padding-bottom: var(--spacing--m);
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing--m);
+	margin-top: var(--spacing--l);
+	text-align: center;
+}
+
+.poweredBy {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing--2xs);
+
+	:global([data-test-id='boto-logo']) {
+		width: 64px;
+	}
 }
 </style>

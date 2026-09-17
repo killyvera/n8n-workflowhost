@@ -46,10 +46,29 @@ export const devServerPlugin = (env: NodeJS.ProcessEnv): Plugin => ({
 		// Vite's loadEnv reads VUE_* straight out of process.env and runs after
 		// this hook, so the assignment still reaches import.meta.env.
 		// Truthiness, not ??=: an explicitly empty value counts as unset.
+		// Prefer same-origin editor URL + Vite proxy so a production Docker API
+		// (no CORS) still works with `pnpm dev:fe:editor`.
 		if (!env.VUE_APP_URL_BASE_API) {
-			env.VUE_APP_URL_BASE_API = `http://localhost:${backendPort}/`;
+			env.VUE_APP_URL_BASE_API = `http://localhost:${editorPort}/`;
 		}
 
-		return { server: { host: '0.0.0.0', port: editorPort, strictPort: true } };
+		return {
+			server: {
+				host: '0.0.0.0',
+				port: editorPort,
+				strictPort: true,
+				proxy: {
+					'/rest': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/webhook': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/webhook-test': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/webhook-waiting': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/form': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/types': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/healthz': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/assets': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+					'/static': { target: `http://localhost:${backendPort}`, changeOrigin: true },
+				},
+			},
+		};
 	},
 });

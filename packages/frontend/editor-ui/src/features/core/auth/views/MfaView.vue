@@ -192,7 +192,9 @@ onMounted(() => {
 
 <template>
 	<div :class="$style.container">
-		<BotoLogo size="compact" variant="dark" />
+		<div :class="$style.brandBlock">
+			<BotoLogo size="compact" />
+		</div>
 		<N8nCard>
 			<div :class="$style.headerContainer">
 				<N8nHeading size="xlarge" color="text-dark">{{
@@ -273,6 +275,13 @@ body {
 	> * {
 		width: 352px;
 	}
+}
+
+.brandBlock {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: var(--spacing--l);
 }
 
 .formContainer {
