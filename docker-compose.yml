@@ -3,13 +3,16 @@
 # Full source build: Dockerfile.build (or master Dockerfile).
 #
 # Persistence: Postgres. Keep N8N_ENCRYPTION_KEY stable across redeploys.
-# Editor: http://localhost:5678
+# Muelle: load .env (n8n) + .env.pg (postgres). N8N_PORT must match Caddy target (8000).
 
 services:
   postgres:
     image: postgres:16-alpine
     container_name: n8n-workflowhost-db
     restart: unless-stopped
+    env_file:
+      - path: .env.pg
+        required: false
     environment:
       POSTGRES_USER: ${DB_POSTGRESDB_USER:-n8n}
       POSTGRES_PASSWORD: ${DB_POSTGRESDB_PASSWORD:-n8n}
@@ -40,29 +43,29 @@ services:
       postgres:
         condition: service_healthy
     ports:
-      - "${N8N_HOST_PORT:-5678}:5678"
+      - "${N8N_HOST_PORT:-8000}:${N8N_PORT:-8000}"
     environment:
       NODE_ENV: production
-      N8N_PORT: "5678"
-      N8N_LISTEN_ADDRESS: "0.0.0.0"
+      N8N_PORT: ${N8N_PORT:-8000}
+      N8N_LISTEN_ADDRESS: ${N8N_LISTEN_ADDRESS:-0.0.0.0}
       N8N_PROTOCOL: ${N8N_PROTOCOL:-http}
       N8N_HOST: ${N8N_HOST:-localhost}
-      N8N_EDITOR_BASE_URL: ${N8N_EDITOR_BASE_URL:-http://localhost:5678/}
-      N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL:-${WEBHOOK_URL:-http://localhost:5678/}}
+      N8N_EDITOR_BASE_URL: ${N8N_EDITOR_BASE_URL:-http://localhost:8000/}
+      N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL:-${WEBHOOK_URL:-http://localhost:8000/}}
       N8N_PROXY_HOPS: ${N8N_PROXY_HOPS:-0}
       GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-America/Mexico_City}
       TZ: ${TZ:-America/Mexico_City}
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:-change-me-before-production}
       N8N_DIAGNOSTICS_ENABLED: ${N8N_DIAGNOSTICS_ENABLED:-false}
-      N8N_PERSONALIZATION_ENABLED: "false"
-      N8N_VERSION_NOTIFICATIONS_ENABLED: "false"
-      N8N_PUBLIC_API_DISABLED: "false"
+      N8N_PERSONALIZATION_ENABLED: ${N8N_PERSONALIZATION_ENABLED:-false}
+      N8N_VERSION_NOTIFICATIONS_ENABLED: ${N8N_VERSION_NOTIFICATIONS_ENABLED:-false}
+      N8N_PUBLIC_API_DISABLED: ${N8N_PUBLIC_API_DISABLED:-false}
       N8N_DISABLED_MODULES: ${N8N_DISABLED_MODULES:-}
       N8N_EXPRESSION_ENGINE: ${N8N_EXPRESSION_ENGINE:-legacy}
-      # Database (Postgres) — survives image rebuild / pull
-      DB_TYPE: postgresdb
-      DB_POSTGRESDB_HOST: postgres
-      DB_POSTGRESDB_PORT: "5432"
+      # Database — on Muelle set DB_POSTGRESDB_HOST to the Postgres container id (see .env)
+      DB_TYPE: ${DB_TYPE:-postgresdb}
+      DB_POSTGRESDB_HOST: ${DB_POSTGRESDB_HOST:-postgres}
+      DB_POSTGRESDB_PORT: ${DB_POSTGRESDB_PORT:-5432}
       DB_POSTGRESDB_DATABASE: ${DB_POSTGRESDB_DATABASE:-n8n}
       DB_POSTGRESDB_USER: ${DB_POSTGRESDB_USER:-n8n}
       DB_POSTGRESDB_PASSWORD: ${DB_POSTGRESDB_PASSWORD:-n8n}
@@ -76,7 +79,7 @@ services:
           "CMD",
           "node",
           "-e",
-          "fetch('http://127.0.0.1:5678/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+          "fetch('http://127.0.0.1:'+(process.env.N8N_PORT||8000)+'/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
         ]
       interval: 30s
       timeout: 10s
