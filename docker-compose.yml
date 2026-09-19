@@ -33,7 +33,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ghcr.io/killyvera/n8n-workflowhost:1.0.0
+    image: ghcr.io/killyvera/n8n-workflowhost:1.0.1
     container_name: n8n-workflowhost
     restart: unless-stopped
     depends_on:
